@@ -1,0 +1,62 @@
+Nitishs-MacBook-Pro:network nitishbhushan$ ls
+chaincode			consoleOutput.log		docker-compose-hlf11.yaml	orderer				peer0.org2.com.au
+channels			crypto-config-bkup		dockerComposeOutput.log		orderer.hlf11.com.au		problemStatement.txt
+cli.yaml			crypto-config.yaml		network.sh			peer.yaml			setup.sh
+configtx.yaml			crypto.sh			networkOutput.log		peer0.org1.com.au		setupOutput.log
+Nitishs-MacBook-Pro:network nitishbhushan$ ./crypto.sh 
+#################################################################
+#######    Generating crypto material using Fabric CA  ##########
+#################################################################
+Checking executables ...
+Setting up organizations ...
+    Starting CA server in crypto-config/ordererOrganizations/hlf11.com.au/ca/root on port 7100 ...
+    CA server is started in crypto-config/ordererOrganizations/hlf11.com.au/ca/root and listening on port 7100
+    Enrolled crypto-config/ordererOrganizations/hlf11.com.au/ca/root/tls with CA at http://admin:adminpw@localhost:7100
+    Enrolled crypto-config/ordererOrganizations/hlf11.com.au/users/rootAdmin with CA at http://admin:adminpw@localhost:7100
+    Registered user nodeAdmin with intermediate CA as crypto-config/ordererOrganizations/hlf11.com.au/users/rootAdmin
+    Enrolled crypto-config/ordererOrganizations/hlf11.com.au/users/Admin@hlf11.com.au with CA at http://nodeAdmin:secret@localhost:7100
+    Registered user User1@hlf11.com.au with intermediate CA as crypto-config/ordererOrganizations/hlf11.com.au/users/rootAdmin
+    Enrolled crypto-config/ordererOrganizations/hlf11.com.au/users/User1@hlf11.com.au with CA at http://User1@hlf11.com.au:secret@localhost:7100
+    Enrolled crypto-config/ordererOrganizations/hlf11.com.au/orderers/orderer.hlf11.com.au/tls with CA at http://admin:adminpw@localhost:7100
+    Registered user orderer.hlf11.com.au with intermediate CA as crypto-config/ordererOrganizations/hlf11.com.au/users/rootAdmin
+    Enrolled crypto-config/ordererOrganizations/hlf11.com.au/orderers/orderer.hlf11.com.au with CA at http://orderer.hlf11.com.au:secret@localhost:7100
+    Loaded CA certificates into crypto-config/ordererOrganizations/hlf11.com.au from CA at http://admin:adminpw@localhost:7100
+    Starting CA server in crypto-config/peerOrganizations/org1.com.au/ca/root on port 7102 ...
+    CA server is started in crypto-config/peerOrganizations/org1.com.au/ca/root and listening on port 7102
+    Enrolled crypto-config/peerOrganizations/org1.com.au/ca/root/tls with CA at http://admin:adminpw@localhost:7102
+    Enrolled crypto-config/peerOrganizations/org1.com.au/users/rootAdmin with CA at http://admin:adminpw@localhost:7102
+    Registered user nodeAdmin with intermediate CA as crypto-config/peerOrganizations/org1.com.au/users/rootAdmin
+    Enrolled crypto-config/peerOrganizations/org1.com.au/users/Admin@org1.com.au with CA at http://nodeAdmin:secret@localhost:7102
+    Registered user User1@org1.com.au with intermediate CA as crypto-config/peerOrganizations/org1.com.au/users/rootAdmin
+    Enrolled crypto-config/peerOrganizations/org1.com.au/users/User1@org1.com.au with CA at http://User1@org1.com.au:secret@localhost:7102
+    Enrolled crypto-config/peerOrganizations/org1.com.au/peers/peer0.org1.com.au/tls with CA at http://admin:adminpw@localhost:7102
+    Registered user peer0.org1.com.au with intermediate CA as crypto-config/peerOrganizations/org1.com.au/users/rootAdmin
+    Enrolled crypto-config/peerOrganizations/org1.com.au/peers/peer0.org1.com.au with CA at http://peer0.org1.com.au:secret@localhost:7102
+    Enrolled crypto-config/peerOrganizations/org1.com.au/peers/peer1.org1.com.au/tls with CA at http://admin:adminpw@localhost:7102
+    Registered user peer1.org1.com.au with intermediate CA as crypto-config/peerOrganizations/org1.com.au/users/rootAdmin
+    Enrolled crypto-config/peerOrganizations/org1.com.au/peers/peer1.org1.com.au with CA at http://peer1.org1.com.au:secret@localhost:7102
+    Loaded CA certificates into crypto-config/peerOrganizations/org1.com.au from CA at http://admin:adminpw@localhost:7102
+    Starting CA server in crypto-config/peerOrganizations/org2.com.au/ca/root on port 7104 ...
+    CA server is started in crypto-config/peerOrganizations/org2.com.au/ca/root and listening on port 7104
+    Enrolled crypto-config/peerOrganizations/org2.com.au/ca/root/tls with CA at http://admin:adminpw@localhost:7104
+    Enrolled crypto-config/peerOrganizations/org2.com.au/users/rootAdmin with CA at http://admin:adminpw@localhost:7104
+    Registered user nodeAdmin with intermediate CA as crypto-config/peerOrganizations/org2.com.au/users/rootAdmin
+    Enrolled crypto-config/peerOrganizations/org2.com.au/users/Admin@org2.com.au with CA at http://nodeAdmin:secret@localhost:7104
+    Registered user User1@org2.com.au with intermediate CA as crypto-config/peerOrganizations/org2.com.au/users/rootAdmin
+    Enrolled crypto-config/peerOrganizations/org2.com.au/users/User1@org2.com.au with CA at http://User1@org2.com.au:secret@localhost:7104
+    Enrolled crypto-config/peerOrganizations/org2.com.au/peers/peer0.org2.com.au/tls with CA at http://admin:adminpw@localhost:7104
+    Registered user peer0.org2.com.au with intermediate CA as crypto-config/peerOrganizations/org2.com.au/users/rootAdmin
+    Enrolled crypto-config/peerOrganizations/org2.com.au/peers/peer0.org2.com.au with CA at http://peer0.org2.com.au:secret@localhost:7104
+    Enrolled crypto-config/peerOrganizations/org2.com.au/peers/peer1.org2.com.au/tls with CA at http://admin:adminpw@localhost:7104
+    Registered user peer1.org2.com.au with intermediate CA as crypto-config/peerOrganizations/org2.com.au/users/rootAdmin
+    Enrolled crypto-config/peerOrganizations/org2.com.au/peers/peer1.org2.com.au with CA at http://peer1.org2.com.au:secret@localhost:7104
+    Loaded CA certificates into crypto-config/peerOrganizations/org2.com.au from CA at http://admin:adminpw@localhost:7104
+Finishing ...
+    Stopping CA server in crypto-config/ordererOrganizations/hlf11.com.au/ca/root with PID 13646 ...
+    Stopped CA server in crypto-config/ordererOrganizations/hlf11.com.au/ca/root with PID 13646
+    Stopping CA server in crypto-config/peerOrganizations/org1.com.au/ca/root with PID 13759 ...
+    Stopped CA server in crypto-config/peerOrganizations/org1.com.au/ca/root with PID 13759
+    Stopping CA server in crypto-config/peerOrganizations/org2.com.au/ca/root with PID 13904 ...
+    Stopped CA server in crypto-config/peerOrganizations/org2.com.au/ca/root with PID 13904
+Complete
+Nitishs-MacBook-Pro:network nitishbhushan$ 

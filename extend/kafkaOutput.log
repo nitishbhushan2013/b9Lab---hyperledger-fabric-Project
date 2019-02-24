@@ -1,0 +1,191 @@
+Nitishs-MacBook-Pro:extend nitishbhushan$ ls
+base				cli.yaml			crypto-kafka.sh			kafka.yaml			org3
+chaincode			configtx-kafka.yaml		crypto.sh			log.txt				peer.yaml
+chaincodeInstallOutput.log	configtx.yaml			docker-compose-cli-notUsed.yaml	manageArtApp			setup.sh
+channel-artifacts		configtxlator.md		docker-compose-hlf11-kafka.yaml	network.sh			tearDown_buildAgain.txt
+channels			crypto-config.yaml		docker-compose-hlf11.yaml	orderer.yaml
+Nitishs-MacBook-Pro:extend nitishbhushan$ chmod +x crypto-kafka.sh
+Nitishs-MacBook-Pro:extend nitishbhushan$ 
+Nitishs-MacBook-Pro:extend nitishbhushan$ 
+Nitishs-MacBook-Pro:extend nitishbhushan$ ./crypto-kafka.sh 
+#################################################################
+#######    Generating crypto material using Fabric CA  ##########
+#################################################################
+Checking executables ...
+Setting up organizations ...
+    Starting CA server in crypto-config/ordererOrganizations/hlf11.com.au/ca/root on port 7100 ...
+    CA server is started in crypto-config/ordererOrganizations/hlf11.com.au/ca/root and listening on port 7100
+    Enrolled crypto-config/ordererOrganizations/hlf11.com.au/ca/root/tls with CA at http://admin:adminpw@localhost:7100
+    Enrolled crypto-config/ordererOrganizations/hlf11.com.au/users/rootAdmin with CA at http://admin:adminpw@localhost:7100
+    Registered user nodeAdmin with intermediate CA as crypto-config/ordererOrganizations/hlf11.com.au/users/rootAdmin
+    Enrolled crypto-config/ordererOrganizations/hlf11.com.au/users/Admin@hlf11.com.au with CA at http://nodeAdmin:secret@localhost:7100
+    Registered user User1@hlf11.com.au with intermediate CA as crypto-config/ordererOrganizations/hlf11.com.au/users/rootAdmin
+    Enrolled crypto-config/ordererOrganizations/hlf11.com.au/users/User1@hlf11.com.au with CA at http://User1@hlf11.com.au:secret@localhost:7100
+    Enrolled crypto-config/ordererOrganizations/hlf11.com.au/orderers/orderer0.hlf11.com.au/tls with CA at http://admin:adminpw@localhost:7100
+    Registered user orderer0.hlf11.com.au with intermediate CA as crypto-config/ordererOrganizations/hlf11.com.au/users/rootAdmin
+    Enrolled crypto-config/ordererOrganizations/hlf11.com.au/orderers/orderer0.hlf11.com.au with CA at http://orderer0.hlf11.com.au:secret@localhost:7100
+    Enrolled crypto-config/ordererOrganizations/hlf11.com.au/orderers/orderer1.hlf11.com.au/tls with CA at http://admin:adminpw@localhost:7100
+    Registered user orderer1.hlf11.com.au with intermediate CA as crypto-config/ordererOrganizations/hlf11.com.au/users/rootAdmin
+    Enrolled crypto-config/ordererOrganizations/hlf11.com.au/orderers/orderer1.hlf11.com.au with CA at http://orderer1.hlf11.com.au:secret@localhost:7100
+    Enrolled crypto-config/ordererOrganizations/hlf11.com.au/orderers/orderer2.hlf11.com.au/tls with CA at http://admin:adminpw@localhost:7100
+    Registered user orderer2.hlf11.com.au with intermediate CA as crypto-config/ordererOrganizations/hlf11.com.au/users/rootAdmin
+    Enrolled crypto-config/ordererOrganizations/hlf11.com.au/orderers/orderer2.hlf11.com.au with CA at http://orderer2.hlf11.com.au:secret@localhost:7100
+    Loaded CA certificates into crypto-config/ordererOrganizations/hlf11.com.au from CA at http://admin:adminpw@localhost:7100
+    Starting CA server in crypto-config/peerOrganizations/org1.com.au/ca/root on port 7102 ...
+    CA server is started in crypto-config/peerOrganizations/org1.com.au/ca/root and listening on port 7102
+    Enrolled crypto-config/peerOrganizations/org1.com.au/ca/root/tls with CA at http://admin:adminpw@localhost:7102
+    Enrolled crypto-config/peerOrganizations/org1.com.au/users/rootAdmin with CA at http://admin:adminpw@localhost:7102
+    Registered user nodeAdmin with intermediate CA as crypto-config/peerOrganizations/org1.com.au/users/rootAdmin
+    Enrolled crypto-config/peerOrganizations/org1.com.au/users/Admin@org1.com.au with CA at http://nodeAdmin:secret@localhost:7102
+    Registered user User1@org1.com.au with intermediate CA as crypto-config/peerOrganizations/org1.com.au/users/rootAdmin
+    Enrolled crypto-config/peerOrganizations/org1.com.au/users/User1@org1.com.au with CA at http://User1@org1.com.au:secret@localhost:7102
+    Enrolled crypto-config/peerOrganizations/org1.com.au/peers/peer0.org1.com.au/tls with CA at http://admin:adminpw@localhost:7102
+    Registered user peer0.org1.com.au with intermediate CA as crypto-config/peerOrganizations/org1.com.au/users/rootAdmin
+    Enrolled crypto-config/peerOrganizations/org1.com.au/peers/peer0.org1.com.au with CA at http://peer0.org1.com.au:secret@localhost:7102
+    Enrolled crypto-config/peerOrganizations/org1.com.au/peers/peer1.org1.com.au/tls with CA at http://admin:adminpw@localhost:7102
+    Registered user peer1.org1.com.au with intermediate CA as crypto-config/peerOrganizations/org1.com.au/users/rootAdmin
+    Enrolled crypto-config/peerOrganizations/org1.com.au/peers/peer1.org1.com.au with CA at http://peer1.org1.com.au:secret@localhost:7102
+    Loaded CA certificates into crypto-config/peerOrganizations/org1.com.au from CA at http://admin:adminpw@localhost:7102
+    Starting CA server in crypto-config/peerOrganizations/org2.com.au/ca/root on port 7104 ...
+    CA server is started in crypto-config/peerOrganizations/org2.com.au/ca/root and listening on port 7104
+    Enrolled crypto-config/peerOrganizations/org2.com.au/ca/root/tls with CA at http://admin:adminpw@localhost:7104
+    Enrolled crypto-config/peerOrganizations/org2.com.au/users/rootAdmin with CA at http://admin:adminpw@localhost:7104
+    Registered user nodeAdmin with intermediate CA as crypto-config/peerOrganizations/org2.com.au/users/rootAdmin
+    Enrolled crypto-config/peerOrganizations/org2.com.au/users/Admin@org2.com.au with CA at http://nodeAdmin:secret@localhost:7104
+    Registered user User1@org2.com.au with intermediate CA as crypto-config/peerOrganizations/org2.com.au/users/rootAdmin
+    Enrolled crypto-config/peerOrganizations/org2.com.au/users/User1@org2.com.au with CA at http://User1@org2.com.au:secret@localhost:7104
+    Enrolled crypto-config/peerOrganizations/org2.com.au/peers/peer0.org2.com.au/tls with CA at http://admin:adminpw@localhost:7104
+    Registered user peer0.org2.com.au with intermediate CA as crypto-config/peerOrganizations/org2.com.au/users/rootAdmin
+    Enrolled crypto-config/peerOrganizations/org2.com.au/peers/peer0.org2.com.au with CA at http://peer0.org2.com.au:secret@localhost:7104
+    Enrolled crypto-config/peerOrganizations/org2.com.au/peers/peer1.org2.com.au/tls with CA at http://admin:adminpw@localhost:7104
+    Registered user peer1.org2.com.au with intermediate CA as crypto-config/peerOrganizations/org2.com.au/users/rootAdmin
+    Enrolled crypto-config/peerOrganizations/org2.com.au/peers/peer1.org2.com.au with CA at http://peer1.org2.com.au:secret@localhost:7104
+    Loaded CA certificates into crypto-config/peerOrganizations/org2.com.au from CA at http://admin:adminpw@localhost:7104
+Finishing ...
+    Stopping CA server in crypto-config/ordererOrganizations/hlf11.com.au/ca/root with PID 40933 ...
+    Stopped CA server in crypto-config/ordererOrganizations/hlf11.com.au/ca/root with PID 40933
+    Stopping CA server in crypto-config/peerOrganizations/org1.com.au/ca/root with PID 41113 ...
+    Stopped CA server in crypto-config/peerOrganizations/org1.com.au/ca/root with PID 41113
+    Stopping CA server in crypto-config/peerOrganizations/org2.com.au/ca/root with PID 41258 ...
+    Stopped CA server in crypto-config/peerOrganizations/org2.com.au/ca/root with PID 41258
+Complete
+
+
+
+
+
+
+Nitishs-MacBook-Pro:extend nitishbhushan$ ./setup.sh 
+./setup.sh: line 1: !/bin/bash: No such file or directory
+2018-10-28 17:40:21.209 AEDT [common/tools/configtxgen] main -> INFO 001 Loading configuration
+2018-10-28 17:40:21.225 AEDT [common/tools/configtxgen] doOutputBlock -> INFO 002 Generating genesis block
+2018-10-28 17:40:21.225 AEDT [common/tools/configtxgen] doOutputBlock -> INFO 003 Writing genesis block
+2018-10-28 17:40:21.226 AEDT [common/tools/configtxgen] main -> CRIT 004 Error on outputBlock: Error writing genesis block: open ./orderer/genesis.block: no such file or directory
+2018-10-28 17:40:21.259 AEDT [common/tools/configtxgen] main -> INFO 001 Loading configuration
+2018-10-28 17:40:21.269 AEDT [common/tools/configtxgen] doOutputChannelCreateTx -> INFO 002 Generating new channel configtx
+2018-10-28 17:40:21.296 AEDT [common/tools/configtxgen] doOutputChannelCreateTx -> INFO 003 Writing new channel tx
+2018-10-28 17:40:21.331 AEDT [common/tools/configtxgen] main -> INFO 001 Loading configuration
+2018-10-28 17:40:21.346 AEDT [common/tools/configtxgen] doOutputAnchorPeersUpdate -> INFO 002 Generating anchor peer update
+2018-10-28 17:40:21.346 AEDT [common/tools/configtxgen] doOutputAnchorPeersUpdate -> INFO 003 Writing anchor peer update
+2018-10-28 17:40:21.380 AEDT [common/tools/configtxgen] main -> INFO 001 Loading configuration
+2018-10-28 17:40:21.389 AEDT [common/tools/configtxgen] doOutputAnchorPeersUpdate -> INFO 002 Generating anchor peer update
+2018-10-28 17:40:21.390 AEDT [common/tools/configtxgen] doOutputAnchorPeersUpdate -> INFO 003 Writing anchor peer update
+
+
+
+
+
+
+Nitishs-MacBook-Pro:extend nitishbhushan$ 
+Nitishs-MacBook-Pro:extend nitishbhushan$ 
+Nitishs-MacBook-Pro:extend nitishbhushan$ 
+Nitishs-MacBook-Pro:extend nitishbhushan$ 
+Nitishs-MacBook-Pro:extend nitishbhushan$ 
+Nitishs-MacBook-Pro:extend nitishbhushan$ 
+Nitishs-MacBook-Pro:extend nitishbhushan$ docker-compose -f docker-compose-hlf11-kafka.yaml up
+Pulling kafka2 (hyperledger/fabric-kafka:latest)...
+latest: Pulling from hyperledger/fabric-kafka
+3b37166ec614: Pull complete
+504facff238f: Pull complete
+ebbcacd28e10: Pull complete
+c7fb3351ecad: Pull complete
+2e3debadcbf7: Pull complete
+fc435e46e32e: Pull complete
+a4922bafdce8: Pull complete
+14675a1189ca: Pull complete
+33f930d7053e: Pull complete
+7aa21e006739: Pull complete
+806ba27e29bb: Pull complete
+5b93606e43dd: Pull complete
+c28e9396b3a9: Pull complete
+d4fac70bff73: Pull complete
+Digest: sha256:82ac81938320d05a538b9fd6de0fcd54b5a999188cf9b08822cf25f9ad7970a9
+Status: Downloaded newer image for hyperledger/fabric-kafka:latest
+Creating zookeeper0 ... 
+Creating zookeeper2 ... 
+Creating zookeeper1 ... 
+Creating zookeeper2
+Creating zookeeper1
+Creating zookeeper1 ... done
+Creating kafka1 ... 
+Creating kafka2 ... 
+Creating kafka0 ... 
+Creating kafka3 ... 
+Creating kafka1
+Creating kafka3
+Creating kafka0
+Creating kafka1 ... done
+Recreating orderer1.hlf11.com.au ... 
+Recreating orderer1.hlf11.com.au
+Recreating orderer2.hlf11.com.au ... 
+Recreating orderer2.hlf11.com.au
+Creating orderer0.hlf11.com.au ... 
+Recreating orderer2.hlf11.com.au ... done
+Creating peer0.org2.com.au ... 
+Creating peer0.org1.com.au ... 
+Creating peer0.org2.com.au
+Creating peer0.org2.com.au ... done
+Creating cli.org2 ... 
+Creating peer0.org1.com.au ... done
+Creating cli.org1 ... 
+Creating cli ... 
+Creating cli.org1
+Creating cli.org1 ... done
+Attaching to zookeeper1, zookeeper2, zookeeper0, kafka0, kafka2, kafka1, kafka3, orderer0.hlf11.com.au, orderer1.hlf11.com.au, orderer2.hlf11.com.au, peer0.org2.com.au, peer0.org1.com.au, cli.org2, cli, cli.org1
+orderer1.hlf11.com.au    | 2018-10-28 06:56:22.255 UTC [msp] getPemMaterialFromDir -> WARN 001 Failed reading file /var/hyperledger/orderer/msp/tlsintermediatecerts/tls-localhost-7100.pem: no pem content for file /var/hyperledger/orderer/msp/tlsintermediatecerts/tls-localhost-7100.pem
+orderer0.hlf11.com.au    | 2018-10-28 06:56:22.054 UTC [msp] getPemMaterialFromDir -> WARN 001 Failed reading file /var/hyperledger/orderer/msp/tlsintermediatecerts/tls-localhost-7100.pem: no pem content for file /var/hyperledger/orderer/msp/tlsintermediatecerts/tls-localhost-7100.pem
+orderer0.hlf11.com.au    | 2018-10-28 06:56:22.102 UTC [orderer/common/server] prettyPrintStruct -> INFO 002 Orderer config values:
+orderer0.hlf11.com.au    | 	General.LedgerType = "file"
+orderer0.hlf11.com.au    | 	General.ListenAddress = "0.0.0.0"
+orderer0.hlf11.com.au    | 	General.ListenPort = 7050
+orderer0.hlf11.com.au    | 	General.TLS.Enabled = false
+orderer0.hlf11.com.au    | 	General.TLS.PrivateKey = "/etc/hyperledger/fabric/tls/server.key"
+orderer0.hlf11.com.au    | 	General.TLS.Certificate = "/etc/hyperledger/fabric/tls/server.crt"
+orderer0.hlf11.com.au    | 	General.TLS.RootCAs = [/etc/hyperledger/fabric/tls/ca.crt]
+orderer0.hlf11.com.au    | 	General.TLS.ClientAuthRequired = false
+orderer0.hlf11.com.au    | 	General.TLS.ClientRootCAs = []
+peer0.org2.com.au        | 2018-10-28 06:56:24.853 UTC [msp] getPemMaterialFromDir -> WARN 001 Failed reading file /etc/hyperledger/msp/peer/tlsintermediatecerts/tls-localhost-7104.pem: no pem content for file /etc/hyperledger/msp/peer/tlsintermediatecerts/tls-localhost-7104.pem
+orderer1.hlf11.com.au    | 2018-10-28 06:56:22.307 UTC [orderer/common/server] prettyPrintStruct -> INFO 002 Orderer config values:
+peer0.org1.com.au        | 2018-10-28 06:56:24.928 UTC [msp] getPemMaterialFromDir -> WARN 001 Failed reading file /etc/hyperledger/msp/peer/tlsintermediatecerts/tls-localhost-7102.pem: no pem content for file /etc/hyperledger/msp/peer/tlsintermediatecerts/tls-localhost-7102.pem
+orderer2.hlf11.com.au    | 2018-10-28 06:56:23.126 UTC [msp] getPemMaterialFromDir -> WARN 001 Failed reading file /var/hyperledger/orderer/msp/tlsintermediatecerts/tls-localhost-7100.pem: no pem content for file /var/hyperledger/orderer/msp/tlsintermediatecerts/tls-localhost-7100.pem
+orderer0.hlf11.com.au    | 	General.Keepalive.ServerMinInterval = 1m0s
+orderer1.hlf11.com.au    | 	General.LedgerType = "file"
+peer0.org2.com.au        | 2018-10-28 06:56:24.957 UTC [nodeCmd] serve -> INFO 002 Starting peer:
+orderer0.hlf11.com.au    | 	General.Keepalive.ServerInterval = 2h0m0s
+orderer1.hlf11.com.au    | 	General.ListenAddress = "0.0.0.0"
+peer0.org2.com.au        |  Version: 1.1.0
+peer0.org1.com.au        | 2018-10-28 06:56:25.061 UTC [nodeCmd] serve -> INFO 002 Starting peer:
+orderer0.hlf11.com.au    | 	General.Keepalive.ServerTimeout = 20s
+orderer2.hlf11.com.au    | 2018-10-28 06:56:23.171 UTC [orderer/common/server] prettyPrintStruct -> INFO 002 Orderer config values:
+orderer1.hlf11.com.au    | 	General.ListenPort = 7050
+peer0.org2.com.au        |  Go version: go1.9.2
+..
+..
+..
+..
+
+
+
+
+
+

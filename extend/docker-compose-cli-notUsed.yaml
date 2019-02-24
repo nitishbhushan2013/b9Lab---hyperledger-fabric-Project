@@ -1,0 +1,111 @@
+#It is the configuration file which extends configurations of services defined for each peers in the 
+#‘docker-compose-base.yaml’ and configurations for one unique container named as ‘cli’ which is an image 
+#replicated and instantiated on a container that is responsible for creating the channel, joining peers to that c
+#hannel and then invoking further interaction from the command line to the fabric. 
+
+version: '2'
+
+networks:
+  hlf11:
+
+services:
+  # define orderer container
+  orderer.hlf11.com.au:
+    container_name: orderer.hlf11.com.au
+    extends: # Services relate to eah peers extends the peer service configurations provided in the ‘peer.yaml’ with ‘extends:’ keyword which defines the location of ‘file: ’ and ‘service: ’ to be extended. 
+      file: base/docker-compose-base.yaml 
+      service: orderer.hlf11.com.au
+
+  # define all the peer containers
+  peer0.org1.com.au: # name of service which will serve as a peer on organization org1 in the fabric network
+    container_name: peer0.org1.com.au # container name for the image ‘hyperledger/fabric-peer’ which will have its instance in the docker container.  
+    extends: # Services relate to eah peers extends the peer service configurations provided in the ‘docker-compose-base.yaml’ with ‘extends:’ keyword which defines the location of ‘file: ’ and ‘service: ’ to be extended. 
+      file: base/docker-compose-base.yaml # docker-compose-base.yaml is the configuration file that contains configurations for all peers
+      service: peer0.org1.com.au # this defined all the configuration for this peer
+     
+
+  peer1.org1.com.au: # name of service which will serve as a peer on organization org1 in the fabric network
+    container_name: peer1.org1.com.au # container name for the image ‘hyperledger/fabric-peer’ which will have its instance in the docker container.  
+    extends: # Services relate to eah peers extends the peer service configurations provided in the ‘docker-compose-base.yaml’ with ‘extends:’ keyword which defines the location of ‘file: ’ and ‘service: ’ to be extended. 
+      file: base/docker-compose-base.yaml # docker-compose-base.yaml is the configuration file that contains configurations for all peers
+      service: peer1.org1.com.au # this defined all the configuration for this peer
+
+  peer0.org2.com.au: # name of service which will serve as a peer on organization org1 in the fabric network
+    container_name: peer0.org2.com.au # container name for the image ‘hyperledger/fabric-peer’ which will have its instance in the docker container.  
+    extends: # Services relate to eah peers extends the peer service configurations provided in the ‘docker-compose-base.yaml’ with ‘extends:’ keyword which defines the location of ‘file: ’ and ‘service: ’ to be extended. 
+      file: base/docker-compose-base.yaml # docker-compose-base.yaml is the configuration file that contains configurations for all peers
+      service: peer0.org2.com.au # this defined all the configuration for this peer
+
+
+  peer1.org2.com.au: # name of service which will serve as a peer on organization org1 in the fabric network
+    container_name: peer1.org2.com.au # container name for the image ‘hyperledger/fabric-peer’ which will have its instance in the docker container.  
+    extends: # Services relate to eah peers extends the peer service configurations provided in the ‘docker-compose-base.yaml’ with ‘extends:’ keyword which defines the location of ‘file: ’ and ‘service: ’ to be extended. 
+      file: base/docker-compose-base.yaml # docker-compose-base.yaml is the configuration file that contains configurations for all peers
+      service: peer1.org2.com.au # this defined all the configuration for this peer  
+
+
+  # Default peer configured is peer0.org1.com.au. If we want the cli container to use for other peer then we need to 
+  #export below four properties
+
+  # Environment variables for PEER1
+    #CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp 
+    #CORE_PEER_ADDRESS=peer1.org1.example.com:7051
+    #CORE_PEER_LOCALMSPID="Org1MSP"
+    #CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.example.com/peers/peer1.org1.example.com/tls/ca.crt
+  
+  cli:
+    container_name: cli
+    extends: 
+      file: base/cli-base.yaml 
+      service: cli-base 
+    image: hyperledger/fabric-tools
+    tty: true
+    environment:
+      - CORE_PEER_ID=cli
+      - CORE_PEER_ADDRESS=peer0.org1.com.au:7051
+      - CORE_PEER_LOCALMSPID=Org1MSP
+      - CORE_PEER_LOCALMSPTYPE=bccsp
+      #- CORE_PEER_TLS_ENABLED=true
+      #- CORE_PEER_TLS_CERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.com.au/peers/peer0.org1.com.au/tls/server.crt
+      #- CORE_PEER_TLS_KEY_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.com.au/peers/peer0.org1.com.au/tls/server.key
+      #- CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.com.au/peers/peer0.org1.com.au/tls/ca.crt
+      - CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.com.au/users/Admin@org1.com.au/msp
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
+    #command: /bin/bash -c './scripts/script.sh ${CHANNEL_NAME}; sleep $TIMEOUT'
+    volumes:
+        - /var/run/:/host/var/run/
+        - ./crypto-config:/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/
+        - ./orderer/:/opt/gopath/src/github.com/hyperledger/fabric/peer/orderer
+        - ./chaincode:/opt/gopath/src/
+        - ./channels/:/opt/gopath/src/github.com/hyperledger/fabric/peer/channels
+        
+    depends_on:
+      - orderer.hlf11.com.au
+      - peer0.org1.com.au
+      - peer1.org1.com.au
+      - peer0.org2.com.au
+      - peer1.org2.com.au
+
+
+  cli.org1: # name of service which will serve as a peer on organization org1 in the fabric network
+    container_name: cli.org1 # container name for the image ‘hyperledger/fabric-peer’ which will have its instance in the docker container.  
+    extends: # Services relate to eah peers extends the peer service configurations provided in the ‘docker-compose-base.yaml’ with ‘extends:’ keyword which defines the location of ‘file: ’ and ‘service: ’ to be extended. 
+      file: base/docker-compose-base.yaml # docker-compose-base.yaml is the configuration file that contains configurations for all peers
+      service: cli.org1 # this defined all the configuration for this peer  
+
+    depends_on:
+     - orderer.hlf11.com.au
+     - peer0.org1.com.au
+
+
+  cli.org2: # name of service which will serve as a peer on organization org1 in the fabric network
+    container_name: cli.org2 # container name for the image ‘hyperledger/fabric-peer’ which will have its instance in the docker container.  
+    extends: # Services relate to eah peers extends the peer service configurations provided in the ‘docker-compose-base.yaml’ with ‘extends:’ keyword which defines the location of ‘file: ’ and ‘service: ’ to be extended. 
+      file: base/docker-compose-base.yaml # docker-compose-base.yaml is the configuration file that contains configurations for all peers
+      service: cli.org2 # this defined all the configuration for this peer  
+
+    depends_on:
+      - orderer.hlf11.com.au
+      - peer0.org2.com.au
+
+   

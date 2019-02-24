@@ -1,0 +1,297 @@
+version: '2'
+
+networks:
+  hlf11:
+
+services:
+  zookeeper0:
+    container_name: zookeeper0
+    extends:
+      file: kafka.yaml
+      service: zookeeper
+    environment:
+      - ZOO_MY_ID=1
+      - ZOO_SERVERS=server.1=zookeeper0:2888:3888 server.2=zookeeper1:2888:3888 server.3=zookeeper2:2888:3888
+    networks:
+      - hlf11
+
+  zookeeper1:
+    container_name: zookeeper1
+    extends:
+      file: kafka.yaml
+      service: zookeeper
+    environment:
+      - ZOO_MY_ID=2
+      - ZOO_SERVERS=server.1=zookeeper0:2888:3888 server.2=zookeeper1:2888:3888 server.3=zookeeper2:2888:3888
+    networks:
+      - hlf11
+
+  zookeeper2:
+    container_name: zookeeper2
+    extends:
+      file: kafka.yaml
+      service: zookeeper
+    environment:
+      - ZOO_MY_ID=3
+      - ZOO_SERVERS=server.1=zookeeper0:2888:3888 server.2=zookeeper1:2888:3888 server.3=zookeeper2:2888:3888
+    networks:
+      - hlf11
+
+  kafka0:
+    container_name: kafka0
+    extends:
+      file: kafka.yaml
+      service: kafka
+    environment:
+      - KAFKA_BROKER_ID=0
+      - KAFKA_MIN_INSYNC_REPLICAS=2
+      - KAFKA_DEFAULT_REPLICATION_FACTOR=3
+      - KAFKA_ZOOKEEPER_CONNECT=zookeeper0:2181,zookeeper1:2181,zookeeper2:2181
+    depends_on:
+      - zookeeper0
+      - zookeeper1
+      - zookeeper2
+    ports:
+      - 9092:9092
+    networks:
+      - hlf11
+
+  kafka1:
+    container_name: kafka1
+    extends:
+      file: kafka.yaml
+      service: kafka
+    environment:
+      - KAFKA_BROKER_ID=1
+      - KAFKA_DEFAULT_REPLICATION_FACTOR=3
+      - KAFKA_MIN_INSYNC_REPLICAS=2
+      - KAFKA_ZOOKEEPER_CONNECT=zookeeper0:2181,zookeeper1:2181,zookeeper2:2181
+    depends_on:
+      - zookeeper0
+      - zookeeper1
+      - zookeeper2
+    ports:
+      - 10092:9092
+    networks:
+      - hlf11
+
+  kafka2:
+    container_name: kafka2
+    extends:
+      file: kafka.yaml
+      service: kafka
+    environment:
+      - KAFKA_BROKER_ID=2
+      - KAFKA_DEFAULT_REPLICATION_FACTOR=3
+      - KAFKA_MIN_INSYNC_REPLICAS=2
+      - KAFKA_ZOOKEEPER_CONNECT=zookeeper0:2181,zookeeper1:2181,zookeeper2:2181
+    depends_on:
+      - zookeeper0
+      - zookeeper1
+      - zookeeper2
+    ports:
+      - 11092:9092
+    networks:
+      - hlf11
+
+  kafka3:
+    container_name: kafka3
+    extends:
+      file: kafka.yaml
+      service: kafka
+    environment:
+      - KAFKA_BROKER_ID=3
+      - KAFKA_DEFAULT_REPLICATION_FACTOR=3
+      - KAFKA_MIN_INSYNC_REPLICAS=2
+      - KAFKA_ZOOKEEPER_CONNECT=zookeeper0:2181,zookeeper1:2181,zookeeper2:2181
+    depends_on:
+      - zookeeper0
+      - zookeeper1
+      - zookeeper2
+    ports:
+      - 12092:9092
+    networks:
+      - hlf11
+
+
+  # define orderer container
+  orderer0.hlf11.com.au:
+    container_name: orderer0.hlf11.com.au
+    extends:
+      file: orderer.yaml
+      service: orderer
+    volumes:
+      - ./crypto-config/ordererOrganizations/hlf11.com.au/orderers/orderer0.hlf11.com.au/msp:/var/hyperledger/orderer/msp
+       #- ./orderer0.hlf11.com.au:/var/hyperledger/production/orderer 
+    depends_on:
+      - zookeeper0
+      - zookeeper1
+      - zookeeper2
+      - kafka0
+      - kafka1
+      - kafka2
+      - kafka3
+    networks:
+      - hlf11
+
+  orderer1.hlf11.com.au:
+    container_name: orderer1.hlf11.com.au
+    extends:
+      file: orderer.yaml
+      service: orderer
+    volumes:
+       - ./crypto-config/ordererOrganizations/hlf11.com.au/orderers/orderer1.hlf11.com.au/msp:/var/hyperledger/orderer/msp
+       #- ./orderer1.hlf11.com.au:/var/hyperledger/production/orderer 
+    depends_on:
+      - zookeeper0
+      - zookeeper1
+      - zookeeper2
+      - kafka0
+      - kafka1
+      - kafka2
+      - kafka3
+    networks:
+      - hlf11
+
+  orderer2.hlf11.com.au:
+    container_name: orderer2.hlf11.com.au
+    extends:
+      file: orderer.yaml
+      service: orderer
+    volumes:
+      - ./crypto-config/ordererOrganizations/hlf11.com.au/orderers/orderer2.hlf11.com.au/msp:/var/hyperledger/orderer/msp
+     # - ./orderer2.hlf11.com.au:/var/hyperledger/production/orderer 
+    depends_on:
+      - zookeeper0
+      - zookeeper1
+      - zookeeper2
+      - kafka0
+      - kafka1
+      - kafka2
+      - kafka3
+    networks:
+      - hlf11  
+
+ 
+  # define all the peer containers
+  peer0.org1.com.au:
+    container_name: peer0.org1.com.au
+    extends: 
+      file: ./peer.yaml
+      service: peer
+    environment: 
+      - CORE_PEER_ID=peer0.org1.com.au
+      - CORE_PEER_ADDRESS=peer0.org1.com.au:7051
+      - CORE_PEER_LOCALMSPID=org1MSP
+      - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/msp/peer/  
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.org1.com.au:7051
+    volumes: 
+      - ./crypto-config/peerOrganizations/org1.com.au/peers/peer0.org1.com.au/msp:/etc/hyperledger/msp/peer  
+      - ./crypto-config/peerOrganizations/org1.com.au/users/Admin@org1.com.au/msp:/etc/hyperledger/msp/users
+      - ./peer0.org1.com.au:/var/hyperledger/production
+      
+    ports:
+      - 8051:7051
+      - 8053:7053
+    depends_on: 
+      - orderer0.hlf11.com.au
+      - orderer1.hlf11.com.au
+      - orderer2.hlf11.com.au
+    networks: 
+      - hlf11  
+
+  peer0.org2.com.au:
+    container_name: peer0.org2.com.au
+    extends: 
+      file: ./peer.yaml
+      service: peer
+    environment: 
+      - CORE_PEER_ID=peer0.org2.com.au
+      - CORE_PEER_ADDRESS=peer0.org2.com.au:7051
+      - CORE_PEER_LOCALMSPID=org2MSP
+      - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/msp/peer/  
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.org2.com.au:7051
+    volumes: 
+      - ./crypto-config/peerOrganizations/org2.com.au/peers/peer0.org2.com.au/msp:/etc/hyperledger/msp/peer
+      - ./crypto-config/peerOrganizations/org2.com.au/users/Admin@org2.com.au/msp:/etc/hyperledger/msp/users   
+      - ./peer0.org2.com.au:/var/hyperledger/production
+    ports:
+      - 9051:7051
+      - 9053:7053
+    depends_on: 
+      - orderer0.hlf11.com.au
+      - orderer1.hlf11.com.au
+      - orderer2.hlf11.com.au
+    networks: 
+      - hlf11 
+
+  # define cli container for each peer 
+  cli.org1:
+    extends:
+      file: ./cli.yaml
+      service: cli
+    container_name: cli.org1
+    environment: 
+     - CORE_PEER_ID=cli.org1.com.au
+     - CORE_PEER_ADDRESS=peer0.org1.com.au:7051
+     - CORE_PEER_LOCALMSPID=org1MSP
+     - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/msp/users/Admin@org1.com.au/msp
+    volumes:
+     - ./crypto-config/peerOrganizations/org1.com.au:/etc/hyperledger/msp
+    depends_on:
+     #- orderer.hlf11.com.au
+     - peer0.org1.com.au
+    networks: 
+    - hlf11
+
+  cli.org2:
+    extends:
+      file: ./cli.yaml
+      service: cli
+    container_name: cli.org2
+    environment: 
+      - CORE_PEER_ID=cli.org2.com.au
+      - CORE_PEER_ADDRESS=peer0.org2.com.au:7051
+      - CORE_PEER_LOCALMSPID=org2MSP
+      - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/msp/users/Admin@org2.com.au/msp
+    volumes:
+      - ./crypto-config/peerOrganizations/org2.com.au:/etc/hyperledger/msp
+    depends_on:
+      #- orderer.hlf11.com.au
+      - peer0.org2.com.au
+    networks: 
+     - hlf11
+
+  cli:
+    container_name: cli
+    extends: 
+      file: base/cli-base.yaml 
+      service: cli-base 
+    image: hyperledger/fabric-tools
+    tty: true
+    environment:
+      - CORE_PEER_ID=cli
+      - CORE_PEER_ADDRESS=peer0.org1.com.au:7051
+      - CORE_PEER_LOCALMSPID=Org1MSP
+      - CORE_PEER_LOCALMSPTYPE=bccsp
+      #- CORE_PEER_TLS_ENABLED=true
+      #- CORE_PEER_TLS_CERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.com.au/peers/peer0.org1.com.au/tls/server.crt
+      #- CORE_PEER_TLS_KEY_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.com.au/peers/peer0.org1.com.au/tls/server.key
+      #- CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.com.au/peers/peer0.org1.com.au/tls/ca.crt
+      - CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.com.au/users/Admin@org1.com.au/msp
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
+    #command: /bin/bash -c './scripts/script.sh ${CHANNEL_NAME}; sleep $TIMEOUT'
+    volumes:
+        - /var/run/:/host/var/run/
+        - ./crypto-config:/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/
+        - ./orderer/:/opt/gopath/src/github.com/hyperledger/fabric/peer/orderer
+        - ./chaincode:/opt/gopath/src/
+        - ./channels/:/opt/gopath/src/github.com/hyperledger/fabric/peer/channels
+        
+    depends_on:
+      #- orderer.hlf11.com.au
+      - peer0.org1.com.au
+      #- peer1.org1.com.au
+      - peer0.org2.com.au
+      #- peer1.org2.com.au
+   

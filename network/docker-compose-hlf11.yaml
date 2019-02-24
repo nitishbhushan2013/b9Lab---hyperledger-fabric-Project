@@ -1,0 +1,178 @@
+#docker-composer version 
+version: '2'
+
+networks:
+  hlf11:
+
+# list of docker containers started by this yaml file 
+services:
+  # define orderer container
+  orderer.hlf11.com.au:
+  # image refers to the docker container which is to be started. 
+    image: hyperledger/fabric-orderer:x86_64-1.1.0  
+    # name that the container will display when docker ps is used.
+    container_name: orderer.hlf11.com.au
+    # set environemt variables inside the container. These are not visible to the running application
+    environment: 
+      - ORDERER_GENERAL_LISTENADDRESS=0.0.0.0
+      - ORDERER_GENERAL_GENESISMETHOD=file
+      - ORDERER_GENERAL_GENESISFILE=/var/hyperledger/orderer/orderer.genesis.block
+      - ORDERER_GENERAL_LOCALMSPID=OrdererMSP
+      - ORDERER_GENERAL_LOCALMSPDIR=/var/hyperledger/orderer/msp
+      - ORDERER_GENERAL_LOGLEVEL=debug
+
+      # enabled TLS 
+      - ORDERER_GENERAL_TLS_ENABLED=true
+      # fully qualified path of the file that contains the server private key
+      - ORDERER_GENERAL_TLS_PRIVATEKEY=/var/hyperledger/crypto/orderer/tls/server.key
+      # fully qualified path of the file that contains the server certificate
+      - ORDERER_GENERAL_TLS_CERTIFICATE=/var/hyperledger/crypto/orderer/tls/server.crt
+     # fully qualified path of the file that contains the certificate chain of the
+     #   CA that issued TLS server certificate
+      - ORDERER_GENERAL_TLS_ROOTCAS=[/var/hyperledger/crypto/orderer/tlscacerts/tlsca.hlf11.com.au-cert.pem]
+
+    # mapping between local file system with specific path of the container. 
+    # This allows local information to be shared in a persistent manner with a docker container and, as needed, 
+    #   changed without having to rebuild the container.
+    volumes:
+      - ./orderer/genesis.block:/var/hyperledger/orderer/orderer.genesis.block
+      - ./crypto-config/ordererOrganizations/hlf11.com.au/orderers/orderer.hlf11.com.au/msp:/var/hyperledger/orderer/msp
+      - ./crypto-config/ordererOrganizations/hlf11.com.au/orderers/orderer.hlf11.com.au/tls:/var/hyperledger/crypto/orderer/tls
+      - ./crypto-config/ordererOrganizations/hlf11.com.au/orderers/orderer.hlf11.com.au/msp/tlscacerts:/var/hyperledger/crypto/orderer/tlscacerts
+      - ./crypto-config/peerOrganizations/org1.com.au/peers/peer0.org1.com.au/tls:/var/hyperledger/crypto/peers/peer0/tls
+      - ./crypto-config/peerOrganizations/org2.com.au/peers/peer0.org2.com.au/tls:/var/hyperledger/crypto/peers/peer1/tls
+      - ./orderer.hlf11.com.au:/var/hyperledger/production/orderer 
+
+    # command to be executed when container starts
+    command: orderer
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/orderers
+    # left port - port inside the container. 
+    # right port - port on local operating system
+    ports:
+      - 7050:7050
+    networks:
+      - hlf11
+
+  # define all the peer containers
+  peer0.org1.com.au:
+    container_name: peer0.org1.com.au
+    # base file : get the definition from the peer.yaml
+    extends: 
+      file: ./peer.yaml
+      service: peer
+    # set environemt variables inside the container. These are not visible to the running application  
+    environment: 
+      - CORE_PEER_ID=peer0.org1.com.au
+      - CORE_PEER_ADDRESS=peer0.org1.com.au:7051
+      - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/crypto/peer/msp
+      - CORE_PEER_LOCALMSPID=org1MSP
+      - CORE_LOGGING_PEER=debug
+      - CORE_CHAINCODE_LOGGING_LEVEL=DEBUG
+      # enable GRPC debug
+      - CORE_LOGGING_GRPC=DEBUG
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.org1.com.au:7051
+      - CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/crypto/peer/tlscacerts/tlsca.org1.com.au-cert.pem
+   
+   # mapping between local file system with specific path of the container. 
+    volumes: 
+      - ./crypto-config/peerOrganizations/org1.com.au/peers/peer0.org1.com.au/msp:/etc/hyperledger/crypto/peer/msp
+      - ./crypto-config/peerOrganizations/org1.com.au/peers/peer0.org1.com.au/tls:/etc/hyperledger/crypto/peer/tls
+      - ./crypto-config/peerOrganizations/org1.com.au/users:/etc/hyperledger/msp/users
+      - ./peer0.org1.com.au:/var/hyperledger/production
+      - ./crypto-config/peerOrganizations/org1.com.au/peers/peer0.org1.com.au/msp/tlscacerts/:/etc/hyperledger/crypto/peer/tlscacerts
+    
+    ports:
+      - 8051:7051
+      - 8053:7053
+    # lists docker container names which must be running before this container will successfully start.  
+    depends_on: 
+      - orderer.hlf11.com.au
+    networks: 
+      - hlf11  
+
+  peer0.org2.com.au:
+    container_name: peer0.org2.com.au
+    extends: 
+      file: ./peer.yaml
+      service: peer
+
+    # set environemt variables inside the container. These are not visible to the running application  
+    environment: 
+      - CORE_PEER_ID=peer0.org2.com.au
+      - CORE_PEER_ADDRESS=peer0.org2.com.au:7051
+      - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/crypto/peer/msp
+      - CORE_PEER_LOCALMSPID=org2MSP
+      - CORE_LOGGING_PEER=debug
+      - CORE_CHAINCODE_LOGGING_LEVEL=DEBUG
+      # enable GRPC debug
+      - CORE_LOGGING_GRPC=DEBUG
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.org2.com.au:7051
+      - CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/crypto/peer/tlscacerts/tlsca.org2.com.au-cert.pem
+    # mapping between local file system with specific path of the container.   
+    volumes: 
+      - ./crypto-config/peerOrganizations/org2.com.au/peers/peer0.org2.com.au/msp:/etc/hyperledger/crypto/peer/msp
+      - ./crypto-config/peerOrganizations/org2.com.au/peers/peer0.org2.com.au/tls:/etc/hyperledger/crypto/peer/tls
+      - ./crypto-config/peerOrganizations/org2.com.au/users:/etc/hyperledger/msp/users 
+      - ./peer0.org2.com.au:/var/hyperledger/production
+      - ./crypto-config/peerOrganizations/org2.com.au/peers/peer0.org2.com.au/msp/tlscacerts:/etc/hyperledger/crypto/peer/tlscacerts
+    
+    ports:
+      - 9051:7051
+      - 9053:7053
+
+    # lists docker container name which must be running before this container will successfully start.  
+    depends_on: 
+      - orderer.hlf11.com.au
+    networks: 
+      - hlf11 
+
+  # define cli container for each peer 
+  cli.org1:
+    extends:
+      file: ./cli.yaml
+      service: cli
+    container_name: cli.org1
+    # set environemt variables inside the container. These are not visible to the running application 
+    environment: 
+     - CORE_PEER_TLS_ENABLED=true
+     - CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/crypto/peer/tlscacerts/tlsca.org1.com.au-cert.pem
+     - CORE_PEER_ID=cli.org1.com.au
+     - CORE_PEER_ADDRESS=peer0.org1.com.au:7051
+     - CORE_PEER_LOCALMSPID=org1MSP
+     - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/msp/users/Admin@org1.com.au/msp
+    # mapping between local file system with specific path of the container. 
+    volumes:
+     - ./crypto-config/peerOrganizations/org1.com.au:/etc/hyperledger/msp
+     - ./crypto-config/peerOrganizations/org1.com.au/peers/peer0.org1.com.au/msp/tlscacerts/:/etc/hyperledger/crypto/peer/tlscacerts
+    # lists docker container name which must be running before this container will successfully start.  
+    depends_on:
+     - orderer.hlf11.com.au
+     - peer0.org1.com.au
+    networks: 
+     - hlf11
+
+  cli.org2:
+    extends:
+      file: ./cli.yaml
+      service: cli
+    container_name: cli.org2
+    # set environemt variables inside the container. These are not visible to the running application 
+    environment: 
+       # The below two environment variables must be set when running peer CLI commands against 
+       # a TLS enabled peer node:
+      - CORE_PEER_TLS_ENABLED=true
+      - CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/crypto/peer/tlscacerts/tlsca.org2.com.au-cert.pem
+      - CORE_PEER_ID=cli.org2.com.au
+      - CORE_PEER_ADDRESS=peer0.org2.com.au:7051
+      - CORE_PEER_LOCALMSPID=org2MSP
+      - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/msp/users/Admin@org2.com.au/msp
+    # mapping between local file system with specific path of the container.  
+    volumes:
+      - ./crypto-config/peerOrganizations/org2.com.au:/etc/hyperledger/msp
+      - ./crypto-config/peerOrganizations/org2.com.au/peers/peer0.org2.com.au/msp/tlscacerts:/etc/hyperledger/crypto/peer/tlscacerts
+    # lists docker container name which must be running before this container will successfully start.   
+    depends_on:
+      - orderer.hlf11.com.au
+      - peer0.org2.com.au
+    networks: 
+     - hlf11

@@ -1,0 +1,111 @@
+version: '2'
+
+networks:
+  hlf11:
+
+services:
+  # define orderer container
+  orderer.hlf11.com.au:
+    image: hyperledger/fabric-orderer:x86_64-1.1.0  
+    container_name: orderer.hlf11.com.au
+    environment: 
+      - ORDERER_GENERAL_LISTENADDRESS=0.0.0.0
+      - ORDERER_GENERAL_GENESISMETHOD=file
+      - ORDERER_GENERAL_GENESISFILE=/var/hyperledger/orderer/orderer.genesis.block
+      - ORDERER_GENERAL_LOCALMSPID=OrdererMSP
+      - ORDERER_GENERAL_LOCALMSPDIR=/var/hyperledger/orderer/msp
+    volumes:
+      - ./orderer/genesis.block:/var/hyperledger/orderer/orderer.genesis.block
+      - ./crypto-config/ordererOrganizations/hlf11.com.au/orderers/orderer.hlf11.com.au/msp:/var/hyperledger/orderer/msp
+      - ./orderer.hlf11.com.au:/var/hyperledger/production/orderer 
+
+    command: orderer
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric
+    ports:
+      - 7050:7050
+    networks:
+      - hlf11
+
+  # define all the peer containers
+  peer0.org1.com.au:
+    container_name: peer0.org1.com.au
+    extends: 
+      file: ./peer.yaml
+      service: peer
+    environment: 
+      - CORE_PEER_ID=peer0.org1.com.au
+      - CORE_PEER_ADDRESS=peer0.org1.com.au:7051
+      - CORE_PEER_LOCALMSPID=org1MSP
+      - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/msp/peer/  
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.org1.com.au:7051
+    volumes: 
+      - ./crypto-config/peerOrganizations/org1.com.au/peers/peer0.org1.com.au/msp:/etc/hyperledger/msp/peer  
+      - ./peer0.org1.com.au:/var/hyperledger/production
+    ports:
+      - 8051:7051
+      - 8053:7053
+    depends_on: 
+      - orderer.hlf11.com.au
+    networks: 
+      - hlf11  
+
+  peer0.org2.com.au:
+    container_name: peer0.org2.com.au
+    extends: 
+      file: ./peer.yaml
+      service: peer
+    environment: 
+      - CORE_PEER_ID=peer0.org2.com.au
+      - CORE_PEER_ADDRESS=peer0.org2.com.au:7051
+      - CORE_PEER_LOCALMSPID=org2MSP
+      - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/msp/peer/  
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.org2.com.au:7051
+    volumes: 
+      - ./crypto-config/peerOrganizations/org2.com.au/peers/peer0.org2.com.au/msp:/etc/hyperledger/msp/peer  
+      - ./peer0.org2.com.au:/var/hyperledger/production
+    ports:
+      - 9051:7051
+      - 9053:7053
+    depends_on: 
+      - orderer.hlf11.com.au
+    networks: 
+      - hlf11 
+
+  # define cli container for each peer 
+  cli.org1:
+    extends:
+      file: ./cli.yaml
+      service: cli
+    container_name: cli.org1
+    environment: 
+     - CORE_PEER_ID=cli.org1.com.au
+     - CORE_PEER_ADDRESS=peer0.org1.com.au:7051
+     - CORE_PEER_LOCALMSPID=org1MSP
+     - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/msp/users/Admin@org1.com.au/msp
+    volumes:
+     - ./crypto-config/peerOrganizations/org1.com.au:/etc/hyperledger/msp
+    depends_on:
+     - orderer.hlf11.com.au
+     - peer0.org1.com.au
+    networks: 
+    - hlf11
+
+  cli.org2:
+    extends:
+      file: ./cli.yaml
+      service: cli
+    container_name: cli.org2
+    environment: 
+      - CORE_PEER_ID=cli.org2.com.au
+      - CORE_PEER_ADDRESS=peer0.org2.com.au:7051
+      - CORE_PEER_LOCALMSPID=org2MSP
+      - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/msp/users/Admin@org2.com.au/msp
+    volumes:
+      - ./crypto-config/peerOrganizations/org2.com.au:/etc/hyperledger/msp
+    depends_on:
+      - orderer.hlf11.com.au
+      - peer0.org2.com.au
+    networks: 
+     - hlf11
+
+   

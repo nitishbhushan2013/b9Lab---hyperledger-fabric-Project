@@ -1,0 +1,19 @@
+Nitishs-MacBook-Pro:network nitishbhushan$ ./setup.sh 
+./setup.sh: line 1: !/bin/bash: No such file or directory
+2018-10-27 12:21:37.899 AEDT [common/tools/configtxgen] main -> INFO 001 Loading configuration
+2018-10-27 12:21:37.911 AEDT [msp] getMspConfig -> INFO 002 Loading NodeOUs
+2018-10-27 12:21:37.911 AEDT [msp] getMspConfig -> INFO 003 Loading NodeOUs
+2018-10-27 12:21:37.912 AEDT [common/tools/configtxgen] doOutputBlock -> INFO 004 Generating genesis block
+2018-10-27 12:21:37.913 AEDT [common/tools/configtxgen] doOutputBlock -> INFO 005 Writing genesis block
+2018-10-27 12:21:37.941 AEDT [common/tools/configtxgen] main -> INFO 001 Loading configuration
+2018-10-27 12:21:37.949 AEDT [common/tools/configtxgen] doOutputChannelCreateTx -> INFO 002 Generating new channel configtx
+2018-10-27 12:21:37.949 AEDT [msp] getMspConfig -> INFO 003 Loading NodeOUs
+2018-10-27 12:21:37.950 AEDT [msp] getMspConfig -> INFO 004 Loading NodeOUs
+2018-10-27 12:21:37.975 AEDT [common/tools/configtxgen] doOutputChannelCreateTx -> INFO 005 Writing new channel tx
+2018-10-27 12:21:38.005 AEDT [common/tools/configtxgen] main -> INFO 001 Loading configuration
+2018-10-27 12:21:38.014 AEDT [common/tools/configtxgen] doOutputAnchorPeersUpdate -> INFO 002 Generating anchor peer update
+2018-10-27 12:21:38.015 AEDT [common/tools/configtxgen] doOutputAnchorPeersUpdate -> INFO 003 Writing anchor peer update
+2018-10-27 12:21:38.041 AEDT [common/tools/configtxgen] main -> INFO 001 Loading configuration
+2018-10-27 12:21:38.049 AEDT [common/tools/configtxgen] doOutputAnchorPeersUpdate -> INFO 002 Generating anchor peer update
+2018-10-27 12:21:38.049 AEDT [common/tools/configtxgen] doOutputAnchorPeersUpdate -> INFO 003 Writing anchor peer update
+Nitishs-MacBook-Pro:network nitishbhushan$ 

@@ -1,0 +1,168 @@
+Nitishs-MacBook-Pro:org3 nitishbhushan$ 
+Nitishs-MacBook-Pro:org3 nitishbhushan$ docker exec -it cli.org1 bash
+root@0e360db1f402:/opt/gopath/src/github.com/hyperledger/fabric/peer# ls
+DEBU      config.json  config_block.json  orderer           org3_update.pb                org3_update_in_envelope.pb  updated_config.json
+channels  config.pb    config_block.pb    org3_update.json  org3_update_in_envelope.json  testchannel.block           updated_config.pb
+root@0e360db1f402:/opt/gopath/src/github.com/hyperledger/fabric/peer# ls
+channels  orderer  testchannel.block
+root@0e360db1f402:/opt/gopath/src/github.com/hyperledger/fabric/peer# jq
+jq - commandline JSON processor [version 1.5-1-a5b5cbe]
+Usage: jq [options] <jq filter> [file...]
+
+	jq is a tool for processing JSON inputs, applying the
+	given filter to its JSON text inputs and producing the
+	filter's results as JSON on standard output.
+	The simplest filter is ., which is the identity filter,
+	copying jq's input to its output unmodified (except for
+	formatting).
+	For more advanced filters see the jq(1) manpage ("man jq")
+	and/or https://stedolan.github.io/jq
+
+	Some of the options include:
+	 -c		compact instead of pretty-printed output;
+	 -n		use `null` as the single input value;
+	 -e		set the exit status code based on the output;
+	 -s		read (slurp) all inputs into an array; apply filter to it;
+	 -r		output raw strings, not JSON texts;
+	 -R		read raw strings, not JSON texts;
+	 -C		colorize JSON;
+	 -M		monochrome (don't colorize JSON);
+	 -S		sort keys of objects on output;
+	 --tab	use tabs for indentation;
+	 --arg a v	set variable $a to value <v>;
+	 --argjson a v	set variable $a to JSON value <v>;
+	 --slurpfile a f	set variable $a to an array of JSON texts read from <f>;
+	See the manpage for more options.
+root@0e360db1f402:/opt/gopath/src/github.com/hyperledger/fabric/peer# 
+root@0e360db1f402:/opt/gopath/src/github.com/hyperledger/fabric/peer# 
+root@0e360db1f402:/opt/gopath/src/github.com/hyperledger/fabric/peer# configtxlator start &
+[1] 33
+root@0e360db1f402:/opt/gopath/src/github.com/hyperledger/fabric/peer# 2018-10-27 06:05:35.295 UTC [configtxlator] startServer -> INFO 001 Serving HTTP requests on 0.0.0.0:7059
+
+root@0e360db1f402:/opt/gopath/src/github.com/hyperledger/fabric/peer# peer channel fetch config config_block.pb  -o orderer.hlf11.com.au:7050 -c testchannel 
+2018-10-27 06:08:16.794 UTC [msp] GetLocalMSP -> DEBU 001 Returning existing local MSP
+2018-10-27 06:08:16.794 UTC [msp] GetDefaultSigningIdentity -> DEBU 002 Obtaining default signing identity
+2018-10-27 06:08:16.799 UTC [channelCmd] InitCmdFactory -> INFO 003 Endorser and orderer connections initialized
+2018-10-27 06:08:16.800 UTC [msp] GetLocalMSP -> DEBU 004 Returning existing local MSP
+2018-10-27 06:08:16.800 UTC [msp] GetDefaultSigningIdentity -> DEBU 005 Obtaining default signing identity
+2018-10-27 06:08:16.801 UTC [msp] GetLocalMSP -> DEBU 006 Returning existing local MSP
+2018-10-27 06:08:16.801 UTC [msp] GetDefaultSigningIdentity -> DEBU 007 Obtaining default signing identity
+2018-10-27 06:08:16.801 UTC [msp/identity] Sign -> DEBU 008 Sign: plaintext: 0ABA080A1708021A0608D081D0DE0522...9B09DB7892FE12080A020A0012020A00 
+2018-10-27 06:08:16.801 UTC [msp/identity] Sign -> DEBU 009 Sign: digest: 68A24186F10620BEB6BD727D457701CBA96D94B68D5FFA9759DC7B419446911A 
+2018-10-27 06:08:16.813 UTC [channelCmd] readBlock -> DEBU 00a Received block: 2
+2018-10-27 06:08:16.814 UTC [msp] GetLocalMSP -> DEBU 00b Returning existing local MSP
+2018-10-27 06:08:16.814 UTC [msp] GetDefaultSigningIdentity -> DEBU 00c Obtaining default signing identity
+2018-10-27 06:08:16.815 UTC [msp] GetLocalMSP -> DEBU 00d Returning existing local MSP
+2018-10-27 06:08:16.815 UTC [msp] GetDefaultSigningIdentity -> DEBU 00e Obtaining default signing identity
+2018-10-27 06:08:16.815 UTC [msp/identity] Sign -> DEBU 00f Sign: plaintext: 0ABA080A1708021A0608D081D0DE0522...12A6120C0A041A02080212041A020802 
+2018-10-27 06:08:16.815 UTC [msp/identity] Sign -> DEBU 010 Sign: digest: 36820E0C80F96486B575D5A2FFBE8410A4973DA1381322E153FC74209E1B5A2F 
+2018-10-27 06:08:16.820 UTC [channelCmd] readBlock -> DEBU 011 Received block: 2
+2018-10-27 06:08:16.824 UTC [main] main -> INFO 012 Exiting.....
+root@0e360db1f402:/opt/gopath/src/github.com/hyperledger/fabric/peer# ls
+channels  config_block.pb  orderer  testchannel.block
+root@0e360db1f402:/opt/gopath/src/github.com/hyperledger/fabric/peer# curl -X POST --data-binary @config_block.pb http://127.0.0.1:7059/protolator/decode/common.Block > config_block.json
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100 52024    0 36515  100 15509   497k   211k --:--:-- --:--:-- --:--:--  502k
+root@0e360db1f402:/opt/gopath/src/github.com/hyperledger/fabric/peer# ls
+channels  config_block.json  config_block.pb  orderer  testchannel.block
+root@0e360db1f402:/opt/gopath/src/github.com/hyperledger/fabric/peer# jq .data.data[0].payload.data.config config_block.json > config.json
+root@0e360db1f402:/opt/gopath/src/github.com/hyperledger/fabric/peer# ls
+channels  config.json  config_block.json  config_block.pb  orderer  testchannel.block
+root@0e360db1f402:/opt/gopath/src/github.com/hyperledger/fabric/peer# ls
+channels  config.json  config_block.json  config_block.pb  orderer  org3.json  testchannel.block
+root@0e360db1f402:/opt/gopath/src/github.com/hyperledger/fabric/peer# jq -s '.[0] * {"channel_group":{"groups":{"Application":{"groups": {"Org3MSP":.[1]}}}}}' config.json org3.json >& updated_config.json
+root@0e360db1f402:/opt/gopath/src/github.com/hyperledger/fabric/peer# 
+root@0e360db1f402:/opt/gopath/src/github.com/hyperledger/fabric/peer# 
+root@0e360db1f402:/opt/gopath/src/github.com/hyperledger/fabric/peer# 
+root@0e360db1f402:/opt/gopath/src/github.com/hyperledger/fabric/peer# CONFIGTXLATOR_URL=http://127.0.0.1:7059
+root@0e360db1f402:/opt/gopath/src/github.com/hyperledger/fabric/peer# export CHANNEL_NAME=testchannel
+root@0e360db1f402:/opt/gopath/src/github.com/hyperledger/fabric/peer# 
+root@0e360db1f402:/opt/gopath/src/github.com/hyperledger/fabric/peer# 
+root@0e360db1f402:/opt/gopath/src/github.com/hyperledger/fabric/peer# curl -X POST --data-binary @config.json "$CONFIGTXLATOR_URL/protolator/encode/common.Config" > config.pb
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100 35756    0  9338  100 26418   271k   769k --:--:-- --:--:-- --:--:--  781k
+root@0e360db1f402:/opt/gopath/src/github.com/hyperledger/fabric/peer# 
+root@0e360db1f402:/opt/gopath/src/github.com/hyperledger/fabric/peer# 
+root@0e360db1f402:/opt/gopath/src/github.com/hyperledger/fabric/peer# curl -X POST --data-binary @updated_config.json "$CONFIGTXLATOR_URL/protolator/encode/common.Config" > updated_config.pb
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100 49619    0 13672  100 35947   181k   478k --:--:-- --:--:-- --:--:--  480k
+root@0e360db1f402:/opt/gopath/src/github.com/hyperledger/fabric/peer# 
+root@0e360db1f402:/opt/gopath/src/github.com/hyperledger/fabric/peer# 
+root@0e360db1f402:/opt/gopath/src/github.com/hyperledger/fabric/peer# 
+root@0e360db1f402:/opt/gopath/src/github.com/hyperledger/fabric/peer# curl -X POST -F channel=$CHANNEL_NAME -F "original=@config.pb" -F "updated=@updated_config.pb" "${CONFIGTXLATOR_URL}/configtxlator/compute/update-from-configs" > org3_update.pb
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100 28024    0  4536  100 23488  59573   301k --:--:-- --:--:-- --:--:--  305k
+root@0e360db1f402:/opt/gopath/src/github.com/hyperledger/fabric/peer# 
+root@0e360db1f402:/opt/gopath/src/github.com/hyperledger/fabric/peer# 
+root@0e360db1f402:/opt/gopath/src/github.com/hyperledger/fabric/peer# 
+root@0e360db1f402:/opt/gopath/src/github.com/hyperledger/fabric/peer# curl -X POST --data-binary @org3_update.pb "$CONFIGTXLATOR_URL/protolator/decode/common.ConfigUpdate" | jq . > org3_update.json
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100 13871    0  9335  100  4536   543k   264k --:--:-- --:--:-- --:--:--  607k
+root@0e360db1f402:/opt/gopath/src/github.com/hyperledger/fabric/peer# 
+root@0e360db1f402:/opt/gopath/src/github.com/hyperledger/fabric/peer# 
+root@0e360db1f402:/opt/gopath/src/github.com/hyperledger/fabric/peer# echo '{"payload":{"header":{"channel_header":{"channel_id":"testchannel", "type":2}},"data":{"config_update":'$(cat org3_update.json)'}}}' | jq . > org3_update_in_envelope.json
+root@0e360db1f402:/opt/gopath/src/github.com/hyperledger/fabric/peer# 
+root@0e360db1f402:/opt/gopath/src/github.com/hyperledger/fabric/peer# 
+root@0e360db1f402:/opt/gopath/src/github.com/hyperledger/fabric/peer# 
+root@0e360db1f402:/opt/gopath/src/github.com/hyperledger/fabric/peer# curl -X POST --data-binary @org3_update_in_envelope.json "$CONFIGTXLATOR_URL/protolator/encode/common.Envelope" > org3_update_in_envelope.pb
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100 16881    0  4564  100 12317   328k   887k --:--:-- --:--:-- --:--:-- 1336k
+root@0e360db1f402:/opt/gopath/src/github.com/hyperledger/fabric/peer# 
+root@0e360db1f402:/opt/gopath/src/github.com/hyperledger/fabric/peer# 
+root@0e360db1f402:/opt/gopath/src/github.com/hyperledger/fabric/peer# 
+root@0e360db1f402:/opt/gopath/src/github.com/hyperledger/fabric/peer# 
+
+
+
+root@9520a5af78bb:/opt/gopath/src/github.com/hyperledger/fabric/peer# peer channel signconfigtx -f org3_update_in_envelope.pb
+2018-10-30 11:30:47.633 UTC [msp] GetLocalMSP -> DEBU 001 Returning existing local MSP
+2018-10-30 11:30:47.636 UTC [msp] GetDefaultSigningIdentity -> DEBU 002 Obtaining default signing identity
+2018-10-30 11:30:47.639 UTC [channelCmd] InitCmdFactory -> INFO 003 Endorser and orderer connections initialized
+2018-10-30 11:30:47.648 UTC [msp] GetLocalMSP -> DEBU 004 Returning existing local MSP
+2018-10-30 11:30:47.650 UTC [msp] GetDefaultSigningIdentity -> DEBU 005 Obtaining default signing identity
+2018-10-30 11:30:47.651 UTC [msp] GetLocalMSP -> DEBU 006 Returning existing local MSP
+2018-10-30 11:30:47.651 UTC [msp] GetDefaultSigningIdentity -> DEBU 007 Obtaining default signing identity
+2018-10-30 11:30:47.651 UTC [msp/identity] Sign -> DEBU 008 Sign: plaintext: 0A81080A074F7267314D535012F5072D...41646D696E7312002A0641646D696E73 
+2018-10-30 11:30:47.652 UTC [msp/identity] Sign -> DEBU 009 Sign: digest: 5A347771294E5DF0165161D61EED13B555E0A92A18A53D42D5A10982256881EA 
+2018-10-30 11:30:47.654 UTC [msp] GetLocalMSP -> DEBU 00a Returning existing local MSP
+2018-10-30 11:30:47.654 UTC [msp] GetDefaultSigningIdentity -> DEBU 00b Obtaining default signing identity
+2018-10-30 11:30:47.655 UTC [msp] GetLocalMSP -> DEBU 00c Returning existing local MSP
+2018-10-30 11:30:47.655 UTC [msp] GetDefaultSigningIdentity -> DEBU 00d Obtaining default signing identity
+2018-10-30 11:30:47.656 UTC [msp/identity] Sign -> DEBU 00e Sign: plaintext: 0ABA080A1708021A0608E781E1DE0522...682038C5255AB78ED52005D90FCE837B 
+2018-10-30 11:30:47.657 UTC [msp/identity] Sign -> DEBU 00f Sign: digest: EE17623E8D06A99A2FE6F6CA745C5DFA4487200C0342A84E7C3B884F38B0F604 
+2018-10-30 11:30:47.659 UTC [main] main -> INFO 010 Exiting.....
+root@9520a5af78bb:/opt/gopath/src/github.com/hyperledger/fabric/peer# peer channel signconfigtx -f org3_update_in_envelope.pb
+2018-10-30 11:35:39.817 UTC [msp] GetLocalMSP -> DEBU 001 Returning existing local MSP
+2018-10-30 11:35:39.817 UTC [msp] GetDefaultSigningIdentity -> DEBU 002 Obtaining default signing identity
+2018-10-30 11:35:39.818 UTC [channelCmd] InitCmdFactory -> INFO 003 Endorser and orderer connections initialized
+2018-10-30 11:35:39.826 UTC [msp] GetLocalMSP -> DEBU 004 Returning existing local MSP
+2018-10-30 11:35:39.826 UTC [msp] GetDefaultSigningIdentity -> DEBU 005 Obtaining default signing identity
+2018-10-30 11:35:39.828 UTC [msp] GetLocalMSP -> DEBU 006 Returning existing local MSP
+2018-10-30 11:35:39.828 UTC [msp] GetDefaultSigningIdentity -> DEBU 007 Obtaining default signing identity
+2018-10-30 11:35:39.829 UTC [msp/identity] Sign -> DEBU 008 Sign: plaintext: 0A81080A074F7267314D535012F5072D...41646D696E7312002A0641646D696E73 
+2018-10-30 11:35:39.830 UTC [msp/identity] Sign -> DEBU 009 Sign: digest: 45EA3349203C751CF39D457EDE61D181D5D415D35628717ABA809831022035B2 
+2018-10-30 11:35:39.831 UTC [msp] GetLocalMSP -> DEBU 00a Returning existing local MSP
+2018-10-30 11:35:39.831 UTC [msp] GetDefaultSigningIdentity -> DEBU 00b Obtaining default signing identity
+2018-10-30 11:35:39.832 UTC [msp] GetLocalMSP -> DEBU 00c Returning existing local MSP
+2018-10-30 11:35:39.832 UTC [msp] GetDefaultSigningIdentity -> DEBU 00d Obtaining default signing identity
+2018-10-30 11:35:39.833 UTC [msp/identity] Sign -> DEBU 00e Sign: plaintext: 0ABA080A1708021A06088B84E1DE0522...912453F1EE6907CF936893B2F7CEDD9F 
+2018-10-30 11:35:39.833 UTC [msp/identity] Sign -> DEBU 00f Sign: digest: 949E292906969FE00C5F14D716D3B7A82ED28211FFFDA8E64C811A2C96CF0CEE 
+2018-10-30 11:35:39.836 UTC [main] main -> INFO 010 Exiting.....
+root@9520a5af78bb:/opt/gopath/src/github.com/hyperledger/fabric/peer# 
+
+root@9520a5af78bb:/opt/gopath/src/github.com/hyperledger/fabric/peer# export CORE_PEER_LOCALMSPID="Org2MSP"
+root@9520a5af78bb:/opt/gopath/src/github.com/hyperledger/fabric/peer# export CORE_PEER_ADDRESS=peer0.org1.com.au:7051
+root@9520a5af78bb:/opt/gopath/src/github.com/hyperledger/fabric/peer# export CORE_PEER_ADDRESS=peer0.org2.com.au:7051
+root@9520a5af78bb:/opt/gopath/src/github.com/hyperledger/fabric/peer# export CHANNEL_NAME="testchannel"
+root@9520a5af78bb:/opt/gopath/src/github.com/hyperledger/fabric/peer# export CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org2.com.au/peers/peer0.org2.com.au/tls/ca.crt
+root@9520a5af78bb:/opt/gopath/src/github.com/hyperledger/fabric/peer# export CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org2.com.au/users/Admin@org2.com.au/msp
+root@9520a5af78bb:/opt/gopath/src/github.com/hyperledger/fabric/peer# export ORDERER_CA=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/hlf11.com.au/orderers/orderer.hlf11.com.au/msp/tlscacerts/tlsca.hlf11.com.au-cert.pem
+root@9520a5af78bb:/opt/gopath/src/github.com/hyperledger/fabric/peer# 
+
+

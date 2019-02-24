@@ -1,0 +1,21 @@
+version: '2'
+
+services:
+  cli:
+    tty: true
+    image: hyperledger/fabric-tools:x86_64-1.1.0
+    environment:
+      - GOPATH=/opt/gopath
+      - CORE_LOGGING_LEVEL=DEBUG
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
+    volumes:
+      - ./orderer/:/opt/gopath/src/github.com/hyperledger/fabric/peer/orderer
+      - ./chaincode:/opt/gopath/src/
+      - ./channels/:/opt/gopath/src/github.com/hyperledger/fabric/peer/channels
+      - ./crypto-config/ordererOrganizations/hlf11.com.au/orderers/orderer.hlf11.com.au/msp/tlscacerts/:/var/hyperledger/orderer/tlscacerts
+      #- ./crypto-config/peerOrganizations:/etc/hyperledger/peerOrganizations
+
+      
+     
+      
+      

@@ -1,0 +1,9 @@
+2.1 
+Nitishs-MacBook-Pro:network nitishbhushan$ ls
+crypto-config.yaml	problemStatement.txt
+Nitishs-MacBook-Pro:network nitishbhushan$ cryptogen generate --config crypto-config.yaml
+org1.com.au
+org2.com.au
+Nitishs-MacBook-Pro:network nitishbhushan$ 
+
+

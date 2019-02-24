@@ -1,0 +1,63 @@
+***************************************************
+                 cli.org1
+***************************************************
+
+root@0e360db1f402:/opt/gopath/src/github.com/hyperledger/fabric/peer# peer chaincode install -p artWork -n artWork -v 0
+2018-10-27 04:12:26.870 UTC [msp] GetLocalMSP -> DEBU 001 Returning existing local MSP
+2018-10-27 04:12:26.870 UTC [msp] GetDefaultSigningIdentity -> DEBU 002 Obtaining default signing identity
+2018-10-27 04:12:26.872 UTC [chaincodeCmd] checkChaincodeCmdParams -> INFO 003 Using default escc
+2018-10-27 04:12:26.872 UTC [chaincodeCmd] checkChaincodeCmdParams -> INFO 004 Using default vscc
+2018-10-27 04:12:26.873 UTC [chaincodeCmd] getChaincodeSpec -> DEBU 005 java chaincode disabled
+2018-10-27 04:12:26.933 UTC [golang-platform] getCodeFromFS -> DEBU 006 getCodeFromFS artWork
+2018-10-27 04:12:27.148 UTC [golang-platform] func1 -> DEBU 007 Discarding GOROOT package encoding/json
+2018-10-27 04:12:27.148 UTC [golang-platform] func1 -> DEBU 008 Discarding GOROOT package fmt
+2018-10-27 04:12:27.148 UTC [golang-platform] func1 -> DEBU 009 Discarding provided package github.com/hyperledger/fabric/core/chaincode/shim
+2018-10-27 04:12:27.148 UTC [golang-platform] func1 -> DEBU 00a Discarding provided package github.com/hyperledger/fabric/protos/peer
+2018-10-27 04:12:27.154 UTC [golang-platform] GetDeploymentPayload -> DEBU 00b done
+2018-10-27 04:12:27.154 UTC [container] WriteFileToPackage -> DEBU 00c Writing file to tarball: src/artWork/artWork.go
+2018-10-27 04:12:27.161 UTC [msp/identity] Sign -> DEBU 00d Sign: plaintext: 0AFE080A5B08031A0B08ABCBCFDE0510...6FE3AF000000FFFF4258429800160000 
+2018-10-27 04:12:27.161 UTC [msp/identity] Sign -> DEBU 00e Sign: digest: 8F9F2491FF5E3570243E5B77014D85D972CB515069AA32F555C103AEA93124A0 
+2018-10-27 04:12:27.169 UTC [chaincodeCmd] install -> DEBU 00f Installed remotely response:<status:200 payload:"OK" > 
+2018-10-27 04:12:27.170 UTC [main] main -> INFO 010 Exiting.....
+root@0e360db1f402:/opt/gopath/src/github.com/hyperledger/fabric/peer# peer chaincode instantiate -C testchannel -n artWork -v 0 -c '{"chaincodeArgs":[]}'
+2018-10-27 04:12:56.168 UTC [msp] GetLocalMSP -> DEBU 001 Returning existing local MSP
+2018-10-27 04:12:56.168 UTC [msp] GetDefaultSigningIdentity -> DEBU 002 Obtaining default signing identity
+2018-10-27 04:12:56.170 UTC [msp/identity] Sign -> DEBU 003 Sign: plaintext: 0AFE080A5B08011A0B08C8CBCFDE0510...6F636B0A0B746573746368616E6E656C 
+2018-10-27 04:12:56.171 UTC [msp/identity] Sign -> DEBU 004 Sign: digest: 102B6D7EAAD1396E38D572ECF9AAB3E073BEB4B7383B70F6FE7B9FE11A5DCEDB 
+2018-10-27 04:12:56.179 UTC [common/channelconfig] NewStandardValues -> DEBU 005 Initializing protos for *channelconfig.ChannelProtos
+2018-10-27 04:12:56.179 UTC [common/channelconfig] initializeProtosStruct -> DEBU 006 Processing field: HashingAlgorithm
+2018-10-27 04:12:56.179 UTC [common/channelconfig] initializeProtosStruct -> DEBU 007 Processing field: BlockDataHashingStructure
+2018-10-27 04:12:56.179 UTC [common/channelconfig] initializeProtosStruct -> DEBU 008 Processing field: OrdererAddresses
+
+
+***************************************************
+                 cli.org2
+***************************************************
+Nitishs-MacBook-Pro:extend nitishbhushan$ docker exec -it cli.org2 bash
+root@5c8e5fbe953d:/opt/gopath/src/github.com/hyperledger/fabric/peer# peer chaincode install -p artWork -n artWork -v 0
+2018-10-27 04:15:16.243 UTC [msp] GetLocalMSP -> DEBU 001 Returning existing local MSP
+2018-10-27 04:15:16.243 UTC [msp] GetDefaultSigningIdentity -> DEBU 002 Obtaining default signing identity
+2018-10-27 04:15:16.245 UTC [chaincodeCmd] checkChaincodeCmdParams -> INFO 003 Using default escc
+2018-10-27 04:15:16.245 UTC [chaincodeCmd] checkChaincodeCmdParams -> INFO 004 Using default vscc
+2018-10-27 04:15:16.245 UTC [chaincodeCmd] getChaincodeSpec -> DEBU 005 java chaincode disabled
+2018-10-27 04:15:16.302 UTC [golang-platform] getCodeFromFS -> DEBU 006 getCodeFromFS artWork
+2018-10-27 04:15:16.480 UTC [golang-platform] func1 -> DEBU 007 Discarding GOROOT package encoding/json
+2018-10-27 04:15:16.481 UTC [golang-platform] func1 -> DEBU 008 Discarding GOROOT package fmt
+2018-10-27 04:15:16.482 UTC [golang-platform] func1 -> DEBU 009 Discarding provided package github.com/hyperledger/fabric/core/chaincode/shim
+2018-10-27 04:15:16.482 UTC [golang-platform] func1 -> DEBU 00a Discarding provided package github.com/hyperledger/fabric/protos/peer
+2018-10-27 04:15:16.488 UTC [golang-platform] GetDeploymentPayload -> DEBU 00b done
+2018-10-27 04:15:16.493 UTC [container] WriteFileToPackage -> DEBU 00c Writing file to tarball: src/artWork/artWork.go
+2018-10-27 04:15:16.498 UTC [msp/identity] Sign -> DEBU 00d Sign: plaintext: 0AFB080A5C08031A0C08D4CCCFDE0510...6FE3AF000000FFFF4258429800160000 
+2018-10-27 04:15:16.499 UTC [msp/identity] Sign -> DEBU 00e Sign: digest: DA8B1B6E9601E9F890ABFE16AA2A573975B450094111EA4B2EA5883C501B59CD 
+2018-10-27 04:15:16.510 UTC [chaincodeCmd] install -> DEBU 00f Installed remotely response:<status:200 payload:"OK" > 
+2018-10-27 04:15:16.510 UTC [main] main -> INFO 010 Exiting.....
+root@5c8e5fbe953d:/opt/gopath/src/github.com/hyperledger/fabric/peer# peer chaincode instantiate -C testchannel -n artWork -v 0 -c '{"Args":[]}'
+2018-10-27 04:15:40.710 UTC [msp] GetLocalMSP -> DEBU 001 Returning existing local MSP
+2018-10-27 04:15:40.710 UTC [msp] GetDefaultSigningIdentity -> DEBU 002 Obtaining default signing identity
+2018-10-27 04:15:40.711 UTC [msp/identity] Sign -> DEBU 003 Sign: plaintext: 0AFB080A5C08011A0C08ECCCCFDE0510...6F636B0A0B746573746368616E6E656C 
+2018-10-27 04:15:40.711 UTC [msp/identity] Sign -> DEBU 004 Sign: digest: 972281A8169DA53A32B1BDDC52307DA5AEF63971F8BBC7333227A1A8EB1C925C 
+2018-10-27 04:15:40.718 UTC [common/channelconfig] NewStandardValues -> DEBU 005 Initializing protos for *channelconfig.ChannelProtos
+2018-10-27 04:15:40.718 UTC [common/channelconfig] initializeProtosStruct -> DEBU 006 Processing field: HashingAlgorithm
+2018-10-27 04:15:40.719 UTC [common/channelconfig] initializeProtosStruct -> DEBU 007 Processing field: BlockDataHashingStructure
+2018-10-27 04:15:40.720 UTC [common/channelconfig] initializeProtosStruct -> DEBU 008 Processing field: OrdererAddresses
+2018-10-27 04:15:40.721 UTC [common/channelconfig] initializeProtosStruct -> DEBU 009 Processing field: Consortium

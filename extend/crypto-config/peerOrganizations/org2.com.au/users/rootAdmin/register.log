@@ -1,0 +1,22 @@
+2018/11/02 17:34:27 [DEBUG] Home directory: /Users/nitishbhushan/Documents/nitish_operations/technical/tehnologies/hyperledger-fabric/b9lab_fabric/certification/b9Lab-HLF11/extend/crypto-config/peerOrganizations/org2.com.au/users/rootAdmin
+2018/11/02 17:34:27 [INFO] Configuration file location: /Users/nitishbhushan/Documents/nitish_operations/technical/tehnologies/hyperledger-fabric/b9lab_fabric/certification/b9Lab-HLF11/extend/crypto-config/peerOrganizations/org2.com.au/users/rootAdmin/fabric-ca-client-config.yaml
+2018/11/02 17:34:27 [DEBUG] Checking for enrollment
+2018/11/02 17:34:27 [DEBUG] Initializing client with config: &{URL:http://localhost:7104 MSPDir:msp TLS:{Enabled:false CertFiles:[] Client:{KeyFile: CertFile:}} Enrollment:{ Name: Secret:**** Profile: Label: CSR:<nil> CAName: AttrReqs:[]  } CSR:{CN:admin Names:[{C:US ST:North Carolina L: O:Hyperledger OU:Fabric SerialNumber:}] Hosts:[Nitishs-MacBook-Pro.local] KeyRequest:<nil> CA:<nil> SerialNumber:} ID:{Name:peer1.org2.com.au Type:user Secret:secret MaxEnrollments:0 Affiliation:org1 Attributes:[] CAName:} Revoke:{Name: Serial: AKI: Reason: CAName: GenCRL:false} CAInfo:{CAName:} CAName: CSP:0xc4201a6ab0}
+2018/11/02 17:34:27 [DEBUG] Initializing BCCSP: &{ProviderName:SW SwOpts:0xc4201a6b10 PluginOpts:<nil> Pkcs11Opts:<nil>}
+2018/11/02 17:34:27 [DEBUG] Initializing BCCSP with software options &{SecLevel:256 HashFamily:SHA2 Ephemeral:false FileKeystore:0xc4201b5660 DummyKeystore:<nil>}
+2018/11/02 17:34:27 [DEBUG] Client configuration settings: &{URL:http://localhost:7104 MSPDir:/Users/nitishbhushan/Documents/nitish_operations/technical/tehnologies/hyperledger-fabric/b9lab_fabric/certification/b9Lab-HLF11/extend/crypto-config/peerOrganizations/org2.com.au/users/rootAdmin/msp TLS:{Enabled:false CertFiles:[] Client:{KeyFile: CertFile:}} Enrollment:{ Name: Secret:**** Profile: Label: CSR:<nil> CAName: AttrReqs:[]  } CSR:{CN:admin Names:[{C:US ST:North Carolina L: O:Hyperledger OU:Fabric SerialNumber:}] Hosts:[Nitishs-MacBook-Pro.local] KeyRequest:<nil> CA:<nil> SerialNumber:} ID:{Name:peer1.org2.com.au Type:user Secret:secret MaxEnrollments:0 Affiliation:org1 Attributes:[] CAName:} Revoke:{Name: Serial: AKI: Reason: CAName: GenCRL:false} CAInfo:{CAName:} CAName: CSP:0xc4201a6ab0}
+2018/11/02 17:34:27 [DEBUG] Entered runRegister
+2018/11/02 17:34:27 [DEBUG] Initializing client with config: &{URL:http://localhost:7104 MSPDir:/Users/nitishbhushan/Documents/nitish_operations/technical/tehnologies/hyperledger-fabric/b9lab_fabric/certification/b9Lab-HLF11/extend/crypto-config/peerOrganizations/org2.com.au/users/rootAdmin/msp TLS:{Enabled:false CertFiles:[] Client:{KeyFile: CertFile:}} Enrollment:{ Name: Secret:**** Profile: Label: CSR:<nil> CAName: AttrReqs:[]  } CSR:{CN:admin Names:[{C:US ST:North Carolina L: O:Hyperledger OU:Fabric SerialNumber:}] Hosts:[Nitishs-MacBook-Pro.local] KeyRequest:<nil> CA:<nil> SerialNumber:} ID:{Name:peer1.org2.com.au Type:user Secret:secret MaxEnrollments:0 Affiliation:org1 Attributes:[] CAName:} Revoke:{Name: Serial: AKI: Reason: CAName: GenCRL:false} CAInfo:{CAName:} CAName: CSP:0xc4201a6ab0}
+2018/11/02 17:34:27 [DEBUG] Initializing BCCSP: &{ProviderName:SW SwOpts:0xc4201a6b10 PluginOpts:<nil> Pkcs11Opts:<nil>}
+2018/11/02 17:34:27 [DEBUG] Initializing BCCSP with software options &{SecLevel:256 HashFamily:SHA2 Ephemeral:false FileKeystore:0xc4201b5660 DummyKeystore:<nil>}
+2018/11/02 17:34:27 [DEBUG] Loading identity: keyFile=/Users/nitishbhushan/Documents/nitish_operations/technical/tehnologies/hyperledger-fabric/b9lab_fabric/certification/b9Lab-HLF11/extend/crypto-config/peerOrganizations/org2.com.au/users/rootAdmin/msp/keystore/key.pem, certFile=/Users/nitishbhushan/Documents/nitish_operations/technical/tehnologies/hyperledger-fabric/b9lab_fabric/certification/b9Lab-HLF11/extend/crypto-config/peerOrganizations/org2.com.au/users/rootAdmin/msp/signcerts/cert.pem
+2018/11/02 17:34:27 [DEBUG] Register { Name:peer1.org2.com.au Type:user Secret:**** MaxEnrollments:0 Affiliation:org1 Attributes:[] CAName:  }
+2018/11/02 17:34:27 [DEBUG] Adding token-based authorization header
+2018/11/02 17:34:27 [DEBUG] Sending request
+POST http://localhost:7104/register
+{"id":"peer1.org2.com.au","type":"user","secret":"secret","affiliation":"org1"}
+2018/11/02 17:34:27 [DEBUG] Received response
+statusCode=201 (201 Created)
+2018/11/02 17:34:27 [DEBUG] Response body result: map[secret:secret]
+2018/11/02 17:34:27 [DEBUG] The register request completed successfully
+Password: secret

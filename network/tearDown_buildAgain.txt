@@ -1,0 +1,34 @@
+I am planning to wipe out local fabric runtime from /hlf11 and start afresh. I would be following below steps. 
+
+*Destruction Stage*
+Step1: run 'docker-compose -f docker-compose-hlf11.yaml down' to stop all the containers.
+step2: just to double confirm - delete all the stopped docker containers from local system.
+step3: From the /hlf11 folder, delete all the peer and orderer related subfolder. These includes 'orderer', 
+'orderer.hlf11.com', 'peer0.org1.com.au', 'peer0.org2.com.au'. 
+Also delete channels and crypto-config folder. 
+
+*construction stage*
+Create orderer and channels folder
+Step4: run crypto.sh to generate MSP for all the orderer and  Organisation peers. This will generate the crypto-config folder and its content at crypto_config folder
+Step5: run setup.sh - This will generate orderer genesis block, peer update tx and anchor peer update tx files
+Step6: run 'docker-compose -f docker-compose-hlf11.yaml up'
+Step7:
+tls disabled mode : run network.sh - This will create channel, join peers to the channel, install chanincode on peers and initialise the chain codes
+tls enabled mode : run networkWithTlsCertificate.sh - This will create channel, join peers to the channel, install chanincode on peers and initialise the chain codes
+
+
+
+Files
+/Users/nitishbhushan/Documents/nitish_operations/technical/tehnologies/hyperledger-fabric/b9lab_fabric/certification/hlf11/setup.sh
+/Users/nitishbhushan/Documents/nitish_operations/technical/tehnologies/hyperledger-fabric/b9lab_fabric/certification/hlf11/network.sh
+/Users/nitishbhushan/Documents/nitish_operations/technical/tehnologies/hyperledger-fabric/b9lab_fabric/certification/hlf11/networkWithTlsCertificate.sh
+/Users/nitishbhushan/Documents/nitish_operations/technical/tehnologies/hyperledger-fabric/b9lab_fabric/certification/hlf11/crypto.sh
+/Users/nitishbhushan/Documents/nitish_operations/technical/tehnologies/hyperledger-fabric/b9lab_fabric/certification/hlf11docker-compose-hlf11.yaml
+
+
+/Users/nitishbhushan/Documents/nitish_operations/technical/tehnologies/hyperledger-fabric/b9lab_fabric/certification/hlf11/
+/Users/nitishbhushan/Documents/nitish_operations/technical/tehnologies/hyperledger-fabric/b9lab_fabric/certification/hlf11/
+
+
+crypto-config/ordererOrganizations/hlf11.com.au/orderers/orderer.hlf11.com.au/msp
+crypto-config/ordererOrganizations/hlf11.com.au/orderers/orderer.hlf11.com.au/tls

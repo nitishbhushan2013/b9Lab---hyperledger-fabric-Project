@@ -1,0 +1,32 @@
+# Admin and Peer certificate will be created automatically by cryptogen.exec
+#Imp 
+  #spacing after : is important
+  # Tab spacing is maintained   
+
+# "OrdererOrgs" - Definition of organizations managing orderer nodes  
+OrdererOrgs: 
+  - Name: Orderer
+    Domain: hlf11.com.au
+    Specs:
+      - Hostname: orderer
+
+# "PeerOrgs" - Definition of organizations managing peer nodes
+PeerOrgs:
+  - Name: org1 # first organisation 
+    Domain: org1.com.au
+    EnableNodeOUs: true # ability to classify identities as either a “client” or a “peer”. 
+    Template:
+      Count: 2 #define no. of peers in this organisation
+    Users:
+      Count: 1 #Number of users Identity for an organization.
+  - Name: org2 # second organisation 
+    Domain: org2.com.au
+    EnableNodeOUs: true
+    Template:
+      Count: 2 # no. of peer in this organization
+    users:
+      Count: 1 #Number of users Identity for an organization.
+
+
+
+

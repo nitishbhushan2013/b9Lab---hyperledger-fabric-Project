@@ -1,0 +1,53 @@
+=============== Nov 2, 2018 (UTC) ===============
+06:35:57.612306 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+06:35:57.636953 db@open opening
+06:35:57.644890 version@stat F·[] S·0B[] Sc·[]
+06:35:57.653096 db@janitor F·2 G·0
+06:35:57.653696 db@open done T·16.085ms
+=============== Nov 2, 2018 (UTC) ===============
+07:16:37.327420 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+07:16:37.342975 version@stat F·[] S·0B[] Sc·[]
+07:16:37.343826 db@open opening
+07:16:37.346802 journal@recovery F·1
+07:16:37.363900 journal@recovery recovering @1
+07:16:37.375387 memdb@flush created L0@2 N·6 S·10KiB "tes..l\x00\x00,v6":"tes..KEY,v1"
+07:16:37.378607 version@stat F·[1] S·10KiB[10KiB] Sc·[0.25]
+07:16:37.395623 db@janitor F·3 G·0
+07:16:37.397682 db@open done T·52.1859ms
+=============== Nov 2, 2018 (UTC) ===============
+07:19:11.013484 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+07:19:11.028447 version@stat F·[1] S·10KiB[10KiB] Sc·[0.25]
+07:19:11.031128 db@open opening
+07:19:11.050801 journal@recovery F·1
+07:19:11.067728 journal@recovery recovering @3
+07:19:11.087252 version@stat F·[1] S·10KiB[10KiB] Sc·[0.25]
+07:19:11.120463 db@janitor F·3 G·0
+07:19:11.120967 db@open done T·85.3956ms
+=============== Nov 3, 2018 (UTC) ===============
+20:56:10.777585 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+20:56:10.805370 version@stat F·[1] S·10KiB[10KiB] Sc·[0.25]
+20:56:10.808363 db@open opening
+20:56:10.817490 journal@recovery F·1
+20:56:10.820159 journal@recovery recovering @5
+20:56:10.832485 version@stat F·[1] S·10KiB[10KiB] Sc·[0.25]
+20:56:10.859050 db@janitor F·3 G·0
+20:56:10.860386 db@open done T·50.0276ms
+=============== Nov 3, 2018 (UTC) ===============
+21:06:08.805204 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+21:06:08.818484 version@stat F·[1] S·10KiB[10KiB] Sc·[0.25]
+21:06:08.819397 db@open opening
+21:06:08.821142 journal@recovery F·1
+21:06:08.822157 journal@recovery recovering @7
+21:06:08.828901 memdb@flush created L0@9 N·2 S·5KiB "tes..l\x00\x00,v9":"tes..KEY,v8"
+21:06:08.835314 version@stat F·[2] S·15KiB[15KiB] Sc·[0.50]
+21:06:08.846617 db@janitor F·4 G·0
+21:06:08.847685 db@open done T·27.8836ms
+=============== Nov 3, 2018 (UTC) ===============
+21:11:47.049725 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+21:11:47.060742 version@stat F·[2] S·15KiB[15KiB] Sc·[0.50]
+21:11:47.061773 db@open opening
+21:11:47.065213 journal@recovery F·1
+21:11:47.067322 journal@recovery recovering @10
+21:11:47.080388 version@stat F·[2] S·15KiB[15KiB] Sc·[0.50]
+21:11:47.104107 db@janitor F·4 G·0
+21:11:47.111428 db@open done T·48.5881ms

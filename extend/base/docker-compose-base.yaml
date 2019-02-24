@@ -1,0 +1,159 @@
+version: '2'
+
+networks:
+  hlf11:
+
+services:
+  # define orderer container
+  orderer.hlf11.com.au:
+    image: hyperledger/fabric-orderer:x86_64-1.1.0  
+    container_name: orderer.hlf11.com.au
+    environment: 
+      - ORDERER_GNERAL_LOGLEVEL=debug #enable debugging in the container itself for each interaction with it.
+      - ORDERER_GENERAL_LISTENADDRESS=0.0.0.0 # listening address for the orderer
+      - ORDERER_GENERAL_GENESISMETHOD=file # genesis block of this blockchain contains its information within a file.
+      - ORDERER_GENERAL_GENESISFILE=/var/hyperledger/orderer/orderer.genesis.block # location of  the genesis block info file.
+      - ORDERER_GENERAL_LOCALMSPID=OrdererMSP # id of the msp defined in the ‘cypto-config.yaml’ 
+      - ORDERER_GENERAL_LOCALMSPDIR=/var/hyperledger/orderer/msp # directory location for the msp directory.
+      # enabled TLS
+      #- ORDERER_GENERAL_TLS_ENABLED=true
+      #- ORDERER_GENERAL_TLS_PRIVATEKEY=/var/hyperledger/orderer/tls/server.key
+      #- ORDERER_GENERAL_TLS_CERTIFICATE=/var/hyperledger/orderer/tls/server.crt
+      #- ORDERER_GENERAL_TLS_ROOTCAS=[/var/hyperledger/orderer/tls/ca.crt]
+    volumes: # mapping the directories that are being used in the environment configurations
+      - ../orderer/genesis.block:/var/hyperledger/orderer/orderer.genesis.block
+      - ../crypto-config/ordererOrganizations/hlf11.com.au/orderers/orderer.hlf11.com.au/msp:/var/hyperledger/orderer/msp
+      #- ./crypto-config/ordererOrganizations/hlf11.com.au/orderers/orderer.hlf11.com.au/tls:/var/hyperledger/orderer/tls
+      - ../orderer.hlf11.com.au:/var/hyperledger/production/orderer 
+
+    command: orderer #  start the orderer in the docker.
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric # this sets the working directory for the orderer.
+    ports: # mapping the ports used by the docker internally.  
+      - 7050:7050 #  docker internally will use 7050 port for orderer and programmatically accessing it we will also be using the same port because of the mapping.
+    networks:
+      - hlf11
+
+  # define all the peer containers
+  peer0.org1.com.au: # name of service which will serve as a peer on organization org1 in the fabric network
+    container_name: peer0.org1.com.au # container name for the image ‘hyperledger/fabric-peer’ which will have its instance in the docker container.  
+    extends: # Services relate to eah peers extends the peer service configurations provided in the ‘peer.yaml’ with ‘extends:’ keyword which defines the location of ‘file: ’ and ‘service: ’ to be extended. 
+      file: peer-base.yaml # peer.yaml’ is the configuration file that contains configurations which are same for all peers
+      service: peer-base
+    environment:   # to set environment configurations specific to this peer only
+      - CORE_PEER_ID=peer0.org1.com.au # id for this peer n the fabric network
+      - CORE_PEER_ADDRESS=peer0.org1.com.au:7051 # address of this specific peer in the fabric network.
+      - CORE_PEER_LOCALMSPID=org1MSP # id of the membership service provider for this peer 
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.org1.com.au:7051 # the point or address for all the external communications to occur with this peer.
+      - CORE_PEER_CHAINCODEADDRESS=peer0.org1.com.au:7052
+      - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:7052
+    volumes: 
+      - /var/run/:/host/var/run/
+      - ../crypto-config/peerOrganizations/org1.com.au/peers/peer0.org1.com.au/msp:/etc/hyperledger/fabric/msp
+      #- ../crypto-config/peerOrganizations/org1.com.au/peers/peer0.org1.com.au/msp:/etc/hyperledger/fabric/tls  
+      - ../peer0.org1.com.au:/var/hyperledger/production
+    ports:
+      - 7051:7051
+      - 7052:7052
+      - 7053:7053
+
+  peer1.org1.com.au: # name of service which will serve as a peer on organization org1 in the fabric network
+    container_name: peer1.org1.com.au # container name for the image ‘hyperledger/fabric-peer’ which will have its instance in the docker container.  
+    extends: # Services relate to eah peers extends the peer service configurations provided in the ‘peer.yaml’ with ‘extends:’ keyword which defines the location of ‘file: ’ and ‘service: ’ to be extended. 
+      file: peer-base.yaml # peer.yaml’ is the configuration file that contains configurations which are same for all peers
+      service: peer-base
+    environment:   # to set environment configurations specific to this peer only
+      - CORE_PEER_ID=peer1.org1.com.au # id for this peer n the fabric network
+      - CORE_PEER_ADDRESS=peer1.org1.com.au:7051 # address of this specific peer in the fabric network.
+      - CORE_PEER_LOCALMSPID=org1MSP # id of the membership service provider for this peer 
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer1.org1.com.au:7051 # the point or address for all the external communications to occur with this peer.
+      - CORE_PEER_CHAINCODEADDRESS=peer1.org1.com.au:7052
+      - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:7052
+    volumes: 
+      - /var/run/:/host/var/run/
+      - ../crypto-config/peerOrganizations/org1.com.au/peers/peer1.org1.com.au/msp:/etc/hyperledger/fabric/msp
+      #- ../crypto-config/peerOrganizations/org1.com.au/peers/peer1.org1.com.au/msp:/etc/hyperledger/fabric/tls  
+      - ../peer1.org1.com.au:/var/hyperledger/production
+    ports:
+      - 8051:7051
+      - 8052:7052
+      - 8053:7053     
+
+
+  peer0.org2.com.au: # name of service which will serve as a peer on organization org1 in the fabric network
+    container_name: peer0.org2.com.au # container name for the image ‘hyperledger/fabric-peer’ which will have its instance in the docker container.  
+    extends: # Services relate to eah peers extends the peer service configurations provided in the ‘peer.yaml’ with ‘extends:’ keyword which defines the location of ‘file: ’ and ‘service: ’ to be extended. 
+      file: peer-base.yaml # peer.yaml’ is the configuration file that contains configurations which are same for all peers
+      service: peer-base
+    environment:   # to set environment configurations specific to this peer only
+      - CORE_PEER_ID=peer0.org2.com.au # id for this peer n the fabric network
+      - CORE_PEER_ADDRESS=peer0.org2.com.au:7051 # address of this specific peer in the fabric network.
+      - CORE_PEER_LOCALMSPID=org2MSP # id of the membership service provider for this peer 
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.org2.com.au:7051 # the point or address for all the external communications to occur with this peer.
+      - CORE_PEER_CHAINCODEADDRESS=peer0.org2.com.au:7052
+      - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:7052
+    volumes: 
+      - /var/run/:/host/var/run/
+      - ../crypto-config/peerOrganizations/org2.com.au/peers/peer0.org2.com.au/msp:/etc/hyperledger/fabric/msp
+      #- ../crypto-config/peerOrganizations/org2.com.au/peers/peer0.org2.com.au/msp:/etc/hyperledger/fabric/tls  
+      - ../peer0.org2.com.au:/var/hyperledger/production
+    ports:
+      - 9051:7051
+      - 9052:7052
+      - 9053:7053 
+
+  peer1.org2.com.au: # name of service which will serve as a peer on organization org1 in the fabric network
+    container_name: peer1.org2.com.au # container name for the image ‘hyperledger/fabric-peer’ which will have its instance in the docker container.  
+    extends: # Services relate to eah peers extends the peer service configurations provided in the ‘peer.yaml’ with ‘extends:’ keyword which defines the location of ‘file: ’ and ‘service: ’ to be extended. 
+      file: peer-base.yaml # peer.yaml’ is the configuration file that contains configurations which are same for all peers
+      service: peer-base
+    environment:   # to set environment configurations specific to this peer only
+      - CORE_PEER_ID=peer1.org2.com.au # id for this peer n the fabric network
+      - CORE_PEER_ADDRESS=peer1.org2.com.au:7051 # address of this specific peer in the fabric network.
+      - CORE_PEER_LOCALMSPID=org2MSP # id of the membership service provider for this peer 
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer1.org2.com.au:7051 # the point or address for all the external communications to occur with this peer.
+      - CORE_PEER_CHAINCODEADDRESS=peer1.org2.com.au:7052
+      - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:7052
+    volumes: 
+      - /var/run/:/host/var/run/
+      - ../crypto-config/peerOrganizations/org2.com.au/peers/peer1.org2.com.au/msp:/etc/hyperledger/fabric/msp
+      #- ../crypto-config/peerOrganizations/org2.com.au/peers/peer1.org2.com.au/msp:/etc/hyperledger/fabric/tls  
+      - ../peer1.org2.com.au:/var/hyperledger/production
+    ports:
+      - 10051:7051
+      - 10052:7052
+      - 10053:7053     
+
+
+  # define cli container for each peer 
+  cli.org1:
+    extends:
+      file: cli-base.yaml
+      service: cli-base
+    container_name: cli.org1
+    environment: 
+     - CORE_PEER_ID=cli.org1.com.au
+     - CORE_PEER_ADDRESS=peer0.org1.com.au:7051
+     - CORE_PEER_LOCALMSPID=org1MSP
+     - CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.com.au/users/Admin@org1.com.au/msp
+    volumes:
+      - ../crypto-config:/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/
+    
+    networks: 
+    - hlf11
+
+  cli.org2:
+    extends:
+      file: cli-base.yaml
+      service: cli-base
+    container_name: cli.org2
+    environment: 
+      - CORE_PEER_ID=cli.org2.com.au
+      - CORE_PEER_ADDRESS=peer0.org2.com.au:7051
+      - CORE_PEER_LOCALMSPID=org2MSP
+      - CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org2.com.au/users/Admin@org2.com.au/msp
+    volumes:
+      - ../crypto-config:/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/
+    
+    networks: 
+     - hlf11
+   

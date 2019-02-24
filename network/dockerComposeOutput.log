@@ -1,0 +1,20 @@
+Nitishs-MacBook-Pro:network nitishbhushan$ docker-compose -f docker-compose-hlf11.yaml up -d 
+Creating orderer.hlf11.com.au ... 
+Creating orderer.hlf11.com.au ... done
+Creating peer0.org1.com.au ... 
+Creating peer0.org2.com.au ... 
+Creating peer0.org2.com.au
+Creating peer0.org2.com.au ... done
+Creating cli.org2 ... 
+Creating peer0.org1.com.au ... done
+Creating cli.org1 ... 
+Creating cli.org2 ... done
+
+Nitishs-MacBook-Pro:network nitishbhushan$ docker ps -a
+CONTAINER ID        IMAGE                                     COMMAND             CREATED             STATUS              PORTS                                            NAMES
+33f711a3e5f7        hyperledger/fabric-tools:x86_64-1.1.0     "/bin/bash"         18 seconds ago      Up 26 seconds                                                        cli.org1
+3f4e3cf66f94        hyperledger/fabric-tools:x86_64-1.1.0     "/bin/bash"         19 seconds ago      Up 25 seconds                                                        cli.org2
+dc7e12f0a2ae        hyperledger/fabric-peer:x86_64-1.1.0      "peer node start"   19 seconds ago      Up 27 seconds       0.0.0.0:8051->7051/tcp, 0.0.0.0:8053->7053/tcp   peer0.org1.com.au
+865e80fc5a08        hyperledger/fabric-peer:x86_64-1.1.0      "peer node start"   20 seconds ago      Up 27 seconds       0.0.0.0:9051->7051/tcp, 0.0.0.0:9053->7053/tcp   peer0.org2.com.au
+cff8d6696865        hyperledger/fabric-orderer:x86_64-1.1.0   "orderer"           21 seconds ago      Up 28 seconds       0.0.0.0:7050->7050/tcp                           orderer.hlf11.com.au
+Nitishs-MacBook-Pro:network nitishbhushan$ 

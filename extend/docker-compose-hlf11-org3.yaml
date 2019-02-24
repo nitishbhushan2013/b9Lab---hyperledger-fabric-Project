@@ -1,0 +1,59 @@
+version: '2'
+
+networks:
+  hlf11:
+
+volumes:
+  peer0.org3.example.com:
+  
+
+services:
+  
+  # define all the peer containers
+  peer0.org3.com.au:
+    container_name: peer0.org3.com.au
+    extends: 
+      file: ./peer.yaml
+      service: peer
+    environment: 
+      - CORE_PEER_ID=peer0.org3.com.au
+      - CORE_PEER_ADDRESS=peer0.org3.com.au:7051
+      - CORE_PEER_LOCALMSPID=org3MSP
+      - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/msp/peer/  
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.org3.com.au:7051
+    volumes: 
+      - ./org3/crypto-config/peerOrganizations/org3.com.au/peers/peer0.org3.com.au/msp:/etc/hyperledger/msp/peer  
+      - ./org3/crypto-config/peerOrganizations/org3.com.au/users/Admin@org3.com.au/msp:/etc/hyperledger/msp/users
+      - ./peer0.org3.com.au:/var/hyperledger/production
+      
+    ports:
+      - 11051:7051
+      - 11053:7053
+   
+    networks: 
+      - hlf11  
+
+  
+
+  # define cli container for each peer 
+  cli.org3:
+    extends:
+      file: ./cli.yaml
+      service: cli
+    container_name: cli.org3
+    environment: 
+     - CORE_PEER_ID=cli.org3.com.au
+     - CORE_PEER_ADDRESS=peer0.org3.com.au:7051
+     - CORE_PEER_LOCALMSPID=org3MSP
+     - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/msp/users/Admin@org3.com.au/msp
+    volumes:
+     - ./org3/crypto-config/peerOrganizations/org3.com.au:/etc/hyperledger/msp
+     - ./org3/crypto-config/peerOrganizations/org2.com.au:/etc/hyperledger/org2/msp
+     - ./org3/crypto-config:/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/
+    depends_on:
+     - peer0.org3.com.au
+   
+    networks: 
+    - hlf11
+
+  

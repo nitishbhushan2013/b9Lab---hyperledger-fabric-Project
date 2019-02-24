@@ -1,0 +1,5 @@
+Art forgery is a major problem for the art market:
+
+Explain the problem and mention current solutions. 
+Describe the advantages and disadvantages of using a blockchain solution. 
+Design a network to help the art market.  

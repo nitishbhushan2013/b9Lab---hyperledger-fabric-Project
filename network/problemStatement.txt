@@ -1,0 +1,8 @@
+Assume, we have two organisations Org1 and Org2. Each organisation runs two peers in the network.
+
+Create certificates using cryptogen. 
+Create a basic network using Docker Compose. 
+Add a channel testchannel for Org1 and Org2 to your network. 
+Write a chaincode for a simple asset transfer and deploy it. 
+Use Fabric CA to replace the certificates. 
+Enable TLS. 

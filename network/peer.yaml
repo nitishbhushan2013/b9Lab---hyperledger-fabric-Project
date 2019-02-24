@@ -1,0 +1,30 @@
+version: '2'
+
+services:
+  peer:
+    image: hyperledger/fabric-peer:x86_64-1.1.0
+    environment:
+      - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+      - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=hlf11_hlf11
+      - CORE_PEER_ADDRESSAUTODETECT=true
+      
+      # https://hyperledger-fabric.readthedocs.io/en/release-1.2/enable_tls.html
+      # Fabric Network TLS settings
+      - CORE_PEER_TLS_ENABLED=true
+      # fully qualified path of the file that contains the TLS server private key
+      - CORE_PEER_TLS_KEY_FILE=/etc/hyperledger/crypto/peer/tls/server.key
+
+      # fully qualified path of the file that contains the TLS server certificate
+      - CORE_PEER_TLS_CERT_FILE=/etc/hyperledger/crypto/peer/tls/server.crt
+
+      # fully qualified path of the file that contains the certificate chain of the certificate authority(CA) 
+      #that issued TLS server certificate
+      - CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/crypto/peer/tls/ca.crt
+
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer/
+    command: peer node start
+    volumes:
+      - /var/run/:/host/var/run/
+      #- ./crypto-config/peerOrganizations:/etc/hyperledger/peerOrganizations
+     
+        

@@ -1,0 +1,164 @@
+Nitishs-MacBook-Pro:network nitishbhushan$ ls
+chaincode			consoleOutput.log		dockerComposeOutput.log		peer.yaml			setup.sh
+channels			crypto-config			network.sh			peer0.org1.com.au		setupOutput.log
+cli.yaml			crypto-config.yaml		orderer				peer0.org2.com.au
+configtx.yaml			docker-compose-hlf11.yaml	orderer.hlf11.com.au		problemStatement.txt
+Nitishs-MacBook-Pro:network nitishbhushan$ ./network.sh 
+./network.sh: line 1: !/bin/bash: No such file or directory
+press any key to create channel
+2018-10-27 01:54:55.146 UTC [msp] GetLocalMSP -> DEBU 001 Returning existing local MSP
+2018-10-27 01:54:55.148 UTC [msp] GetDefaultSigningIdentity -> DEBU 002 Obtaining default signing identity
+2018-10-27 01:54:55.189 UTC [channelCmd] InitCmdFactory -> INFO 003 Endorser and orderer connections initialized
+2018-10-27 01:54:55.199 UTC [msp] GetLocalMSP -> DEBU 004 Returning existing local MSP
+2018-10-27 01:54:55.206 UTC [msp] GetDefaultSigningIdentity -> DEBU 005 Obtaining default signing identity
+2018-10-27 01:54:55.209 UTC [msp] GetLocalMSP -> DEBU 006 Returning existing local MSP
+2018-10-27 01:54:55.209 UTC [msp] GetDefaultSigningIdentity -> DEBU 007 Obtaining default signing identity
+2018-10-27 01:54:55.210 UTC [msp/identity] Sign -> DEBU 008 Sign: plaintext: 0AA6060A076F7267314D5350129A062D...0F686C663131436F6E736F727469756D 
+2018-10-27 01:54:55.210 UTC [msp/identity] Sign -> DEBU 009 Sign: digest: 96828CFA947496D1FC7FF88ADB40F5D8EB14A882B38983BCA4DEA2F3616645A4 
+2018-10-27 01:54:55.211 UTC [msp] GetLocalMSP -> DEBU 00a Returning existing local MSP
+2018-10-27 01:54:55.212 UTC [msp] GetDefaultSigningIdentity -> DEBU 00b Obtaining default signing identity
+2018-10-27 01:54:55.212 UTC [msp] GetLocalMSP -> DEBU 00c Returning existing local MSP
+2018-10-27 01:54:55.212 UTC [msp] GetDefaultSigningIdentity -> DEBU 00d Obtaining default signing identity
+2018-10-27 01:54:55.213 UTC [msp/identity] Sign -> DEBU 00e Sign: plaintext: 0ADF060A1708021A0608EF8ACFDE0522...744E1A53F37B3DF491CA3A07C7485B1B 
+2018-10-27 01:54:55.213 UTC [msp/identity] Sign -> DEBU 00f Sign: digest: 4DEA09848031F8600B8F0D08BE2CA3B291A072B69DE0C1F1822E81BE4680F1BC 
+2018-10-27 01:54:55.253 UTC [msp] GetLocalMSP -> DEBU 010 Returning existing local MSP
+2018-10-27 01:54:55.253 UTC [msp] GetDefaultSigningIdentity -> DEBU 011 Obtaining default signing identity
+2018-10-27 01:54:55.258 UTC [msp] GetLocalMSP -> DEBU 012 Returning existing local MSP
+2018-10-27 01:54:55.258 UTC [msp] GetDefaultSigningIdentity -> DEBU 013 Obtaining default signing identity
+2018-10-27 01:54:55.259 UTC [msp/identity] Sign -> DEBU 014 Sign: plaintext: 0ADF060A1708021A0608EF8ACFDE0522...039B985C334612080A021A0012021A00 
+2018-10-27 01:54:55.259 UTC [msp/identity] Sign -> DEBU 015 Sign: digest: 8A5E0DD0C66E03E891DF9C62A003212F71F1AF0C276B5BA17BF79CEC9B089A72 
+2018-10-27 01:54:55.261 UTC [channelCmd] readBlock -> DEBU 016 Got status: &{NOT_FOUND}
+2018-10-27 01:54:55.263 UTC [msp] GetLocalMSP -> DEBU 017 Returning existing local MSP
+2018-10-27 01:54:55.265 UTC [msp] GetDefaultSigningIdentity -> DEBU 018 Obtaining default signing identity
+2018-10-27 01:54:55.275 UTC [channelCmd] InitCmdFactory -> INFO 019 Endorser and orderer connections initialized
+2018-10-27 01:54:55.479 UTC [msp] GetLocalMSP -> DEBU 01a Returning existing local MSP
+2018-10-27 01:54:55.480 UTC [msp] GetDefaultSigningIdentity -> DEBU 01b Obtaining default signing identity
+2018-10-27 01:54:55.483 UTC [msp] GetLocalMSP -> DEBU 01c Returning existing local MSP
+2018-10-27 01:54:55.483 UTC [msp] GetDefaultSigningIdentity -> DEBU 01d Obtaining default signing identity
+2018-10-27 01:54:55.484 UTC [msp/identity] Sign -> DEBU 01e Sign: plaintext: 0ADF060A1708021A0608EF8ACFDE0522...4AC07153A21C12080A021A0012021A00 
+2018-10-27 01:54:55.484 UTC [msp/identity] Sign -> DEBU 01f Sign: digest: 467F029F9B3C3C468DEB09CE8684C6E3B3E176050B92523D79C0A9088C0C68C2 
+2018-10-27 01:54:55.496 UTC [channelCmd] readBlock -> DEBU 020 Received block: 0
+2018-10-27 01:54:55.502 UTC [main] main -> INFO 021 Exiting.....
+press any key to let peers join the testchannel
+2018-10-27 01:54:57.483 UTC [msp] GetLocalMSP -> DEBU 001 Returning existing local MSP
+2018-10-27 01:54:57.483 UTC [msp] GetDefaultSigningIdentity -> DEBU 002 Obtaining default signing identity
+2018-10-27 01:54:57.496 UTC [channelCmd] InitCmdFactory -> INFO 003 Endorser and orderer connections initialized
+2018-10-27 01:54:57.504 UTC [msp/identity] Sign -> DEBU 004 Sign: plaintext: 0AA4070A5C08011A0C08F18ACFDE0510...3D82C8E3A9AC1A080A000A000A000A00 
+2018-10-27 01:54:57.504 UTC [msp/identity] Sign -> DEBU 005 Sign: digest: 443AF32E1D14101EF40F64193487FC90C8734D93F4CC3CA3E3DA64C8700C0105 
+2018-10-27 01:54:57.600 UTC [channelCmd] executeJoin -> INFO 006 Successfully submitted proposal to join channel
+2018-10-27 01:54:57.600 UTC [main] main -> INFO 007 Exiting.....
+2018-10-27 01:54:57.889 UTC [msp] GetLocalMSP -> DEBU 001 Returning existing local MSP
+2018-10-27 01:54:57.889 UTC [msp] GetDefaultSigningIdentity -> DEBU 002 Obtaining default signing identity
+2018-10-27 01:54:57.898 UTC [channelCmd] InitCmdFactory -> INFO 003 Endorser and orderer connections initialized
+2018-10-27 01:54:57.902 UTC [msp/identity] Sign -> DEBU 004 Sign: plaintext: 0AA4070A5C08011A0C08F18ACFDE0510...3D82C8E3A9AC1A080A000A000A000A00 
+2018-10-27 01:54:57.903 UTC [msp/identity] Sign -> DEBU 005 Sign: digest: 10990591B80E4CC5F8F3031E4C23DB70B849DF12952B46E84F989E834A13DBA9 
+2018-10-27 01:54:57.992 UTC [channelCmd] executeJoin -> INFO 006 Successfully submitted proposal to join channel
+2018-10-27 01:54:57.993 UTC [main] main -> INFO 007 Exiting.....
+press any key to let individual org update its anchor peer in the respective channel
+2018-10-27 01:54:59.175 UTC [msp] GetLocalMSP -> DEBU 001 Returning existing local MSP
+2018-10-27 01:54:59.176 UTC [msp] GetDefaultSigningIdentity -> DEBU 002 Obtaining default signing identity
+2018-10-27 01:54:59.184 UTC [channelCmd] InitCmdFactory -> INFO 003 Endorser and orderer connections initialized
+2018-10-27 01:54:59.191 UTC [msp] GetLocalMSP -> DEBU 004 Returning existing local MSP
+2018-10-27 01:54:59.191 UTC [msp] GetDefaultSigningIdentity -> DEBU 005 Obtaining default signing identity
+2018-10-27 01:54:59.193 UTC [msp] GetLocalMSP -> DEBU 006 Returning existing local MSP
+2018-10-27 01:54:59.193 UTC [msp] GetDefaultSigningIdentity -> DEBU 007 Obtaining default signing identity
+2018-10-27 01:54:59.193 UTC [msp/identity] Sign -> DEBU 008 Sign: plaintext: 0AA6060A076F7267314D5350129A062D...2A0641646D696E732A0641646D696E73 
+2018-10-27 01:54:59.194 UTC [msp/identity] Sign -> DEBU 009 Sign: digest: C05B3B2066790C64211ADD7EF2EBEC1AD682AA89CD9737C5F22CE965A578057E 
+2018-10-27 01:54:59.196 UTC [msp] GetLocalMSP -> DEBU 00a Returning existing local MSP
+2018-10-27 01:54:59.196 UTC [msp] GetDefaultSigningIdentity -> DEBU 00b Obtaining default signing identity
+2018-10-27 01:54:59.197 UTC [msp] GetLocalMSP -> DEBU 00c Returning existing local MSP
+2018-10-27 01:54:59.198 UTC [msp] GetDefaultSigningIdentity -> DEBU 00d Obtaining default signing identity
+2018-10-27 01:54:59.198 UTC [msp/identity] Sign -> DEBU 00e Sign: plaintext: 0ADF060A1708021A0608F38ACFDE0522...09B5289DF143F780C71BECF2634C2A5C 
+2018-10-27 01:54:59.198 UTC [msp/identity] Sign -> DEBU 00f Sign: digest: 7CC154F58BC5C87B0DF1424ED181720AA89C8030B63A42A507959B83B46573EF 
+2018-10-27 01:54:59.220 UTC [channelCmd] update -> INFO 010 Successfully submitted channel update
+2018-10-27 01:54:59.222 UTC [main] main -> INFO 011 Exiting.....
+2018-10-27 01:54:59.475 UTC [msp] GetLocalMSP -> DEBU 001 Returning existing local MSP
+2018-10-27 01:54:59.475 UTC [msp] GetDefaultSigningIdentity -> DEBU 002 Obtaining default signing identity
+2018-10-27 01:54:59.485 UTC [channelCmd] InitCmdFactory -> INFO 003 Endorser and orderer connections initialized
+2018-10-27 01:54:59.492 UTC [msp] GetLocalMSP -> DEBU 004 Returning existing local MSP
+2018-10-27 01:54:59.492 UTC [msp] GetDefaultSigningIdentity -> DEBU 005 Obtaining default signing identity
+2018-10-27 01:54:59.493 UTC [msp] GetLocalMSP -> DEBU 006 Returning existing local MSP
+2018-10-27 01:54:59.493 UTC [msp] GetDefaultSigningIdentity -> DEBU 007 Obtaining default signing identity
+2018-10-27 01:54:59.493 UTC [msp/identity] Sign -> DEBU 008 Sign: plaintext: 0AA6060A076F7267324D5350129A062D...2A0641646D696E732A0641646D696E73 
+2018-10-27 01:54:59.493 UTC [msp/identity] Sign -> DEBU 009 Sign: digest: 239B6B3BACF5CB80C1971323C3E0D3107E5D05A62723E3C6A42A35EF66E146B1 
+2018-10-27 01:54:59.494 UTC [msp] GetLocalMSP -> DEBU 00a Returning existing local MSP
+2018-10-27 01:54:59.495 UTC [msp] GetDefaultSigningIdentity -> DEBU 00b Obtaining default signing identity
+2018-10-27 01:54:59.496 UTC [msp] GetLocalMSP -> DEBU 00c Returning existing local MSP
+2018-10-27 01:54:59.496 UTC [msp] GetDefaultSigningIdentity -> DEBU 00d Obtaining default signing identity
+2018-10-27 01:54:59.496 UTC [msp/identity] Sign -> DEBU 00e Sign: plaintext: 0ADF060A1708021A0608F38ACFDE0522...6B0DA37469FB79ACA92BFF10C3ED0034 
+2018-10-27 01:54:59.496 UTC [msp/identity] Sign -> DEBU 00f Sign: digest: 06CFC8B0394BBFEB444BF05209BC3787F43D5D54EC4D4D5F0500D3F24019D523 
+2018-10-27 01:54:59.520 UTC [channelCmd] update -> INFO 010 Successfully submitted channel update
+2018-10-27 01:54:59.522 UTC [main] main -> INFO 011 Exiting.....
+press any key to install chaincode on each of the peer
+2018-10-27 01:55:00.621 UTC [msp] GetLocalMSP -> DEBU 001 Returning existing local MSP
+2018-10-27 01:55:00.622 UTC [msp] GetDefaultSigningIdentity -> DEBU 002 Obtaining default signing identity
+2018-10-27 01:55:00.622 UTC [chaincodeCmd] checkChaincodeCmdParams -> INFO 003 Using default escc
+2018-10-27 01:55:00.623 UTC [chaincodeCmd] checkChaincodeCmdParams -> INFO 004 Using default vscc
+2018-10-27 01:55:00.623 UTC [chaincodeCmd] getChaincodeSpec -> DEBU 005 java chaincode disabled
+2018-10-27 01:55:00.953 UTC [golang-platform] getCodeFromFS -> DEBU 006 getCodeFromFS artWork
+2018-10-27 01:55:01.652 UTC [golang-platform] func1 -> DEBU 007 Discarding GOROOT package encoding/json
+2018-10-27 01:55:01.652 UTC [golang-platform] func1 -> DEBU 008 Discarding GOROOT package fmt
+2018-10-27 01:55:01.653 UTC [golang-platform] func1 -> DEBU 009 Discarding provided package github.com/hyperledger/fabric/core/chaincode/shim
+2018-10-27 01:55:01.653 UTC [golang-platform] func1 -> DEBU 00a Discarding provided package github.com/hyperledger/fabric/protos/peer
+2018-10-27 01:55:01.659 UTC [golang-platform] GetDeploymentPayload -> DEBU 00b done
+2018-10-27 01:55:01.659 UTC [container] WriteFileToPackage -> DEBU 00c Writing file to tarball: src/artWork/artWork.go
+2018-10-27 01:55:01.672 UTC [msp/identity] Sign -> DEBU 00d Sign: plaintext: 0AA4070A5C08031A0C08F58ACFDE0510...6FE3AF000000FFFF4258429800160000 
+2018-10-27 01:55:01.672 UTC [msp/identity] Sign -> DEBU 00e Sign: digest: 290B6B75E68585D100169BEDA4E4F53C8B210F4DB3CBBFA05E915A1285CF4B8A 
+2018-10-27 01:55:01.682 UTC [chaincodeCmd] install -> DEBU 00f Installed remotely response:<status:200 payload:"OK" > 
+2018-10-27 01:55:01.682 UTC [main] main -> INFO 010 Exiting.....
+2018-10-27 01:55:01.916 UTC [msp] GetLocalMSP -> DEBU 001 Returning existing local MSP
+2018-10-27 01:55:01.917 UTC [msp] GetDefaultSigningIdentity -> DEBU 002 Obtaining default signing identity
+2018-10-27 01:55:01.917 UTC [chaincodeCmd] checkChaincodeCmdParams -> INFO 003 Using default escc
+2018-10-27 01:55:01.918 UTC [chaincodeCmd] checkChaincodeCmdParams -> INFO 004 Using default vscc
+2018-10-27 01:55:01.918 UTC [chaincodeCmd] getChaincodeSpec -> DEBU 005 java chaincode disabled
+2018-10-27 01:55:01.998 UTC [golang-platform] getCodeFromFS -> DEBU 006 getCodeFromFS artWork
+2018-10-27 01:55:02.235 UTC [golang-platform] func1 -> DEBU 007 Discarding GOROOT package encoding/json
+2018-10-27 01:55:02.235 UTC [golang-platform] func1 -> DEBU 008 Discarding GOROOT package fmt
+2018-10-27 01:55:02.235 UTC [golang-platform] func1 -> DEBU 009 Discarding provided package github.com/hyperledger/fabric/core/chaincode/shim
+2018-10-27 01:55:02.235 UTC [golang-platform] func1 -> DEBU 00a Discarding provided package github.com/hyperledger/fabric/protos/peer
+2018-10-27 01:55:02.241 UTC [golang-platform] GetDeploymentPayload -> DEBU 00b done
+2018-10-27 01:55:02.241 UTC [container] WriteFileToPackage -> DEBU 00c Writing file to tarball: src/artWork/artWork.go
+2018-10-27 01:55:02.256 UTC [msp/identity] Sign -> DEBU 00d Sign: plaintext: 0AA3070A5B08031A0B08F68ACFDE0510...6FE3AF000000FFFF4258429800160000 
+2018-10-27 01:55:02.257 UTC [msp/identity] Sign -> DEBU 00e Sign: digest: A7629C895FD99E9A88ECD09358CE0641FF764B29CC8E13D6628FF8E721B07F72 
+2018-10-27 01:55:02.273 UTC [chaincodeCmd] install -> DEBU 00f Installed remotely response:<status:200 payload:"OK" > 
+2018-10-27 01:55:02.273 UTC [main] main -> INFO 010 Exiting.....
+press any key to instantiate chaincode on each of the peer
+bash: -c: line 0: unexpected EOF while looking for matching `''
+bash: -c: line 1: syntax error: unexpected end of file
+bash: -c: line 0: unexpected EOF while looking for matching `''
+bash: -c: line 1: syntax error: unexpected end of file
+Nitishs-MacBook-Pro:network nitishbhushan$ 
+
+
+
+********************************************************************************
+
+                      Login to cli.org21
+********************************************************************************
+
+root@33f711a3e5f7:/opt/gopath/src/github.com/hyperledger/fabric/peer# peer chaincode instantiate -C testchannel -n artWork -v 0 -c '{"Args":[]}'
+2018-10-27 02:00:34.607 UTC [msp] GetLocalMSP -> DEBU 001 Returning existing local MSP
+2018-10-27 02:00:34.608 UTC [msp] GetDefaultSigningIdentity -> DEBU 002 Obtaining default signing identity
+2018-10-27 02:00:34.609 UTC [msp/identity] Sign -> DEBU 003 Sign: plaintext: 0AA4070A5C08011A0C08C28DCFDE0510...6F636B0A0B746573746368616E6E656C 
+2018-10-27 02:00:34.610 UTC [msp/identity] Sign -> DEBU 004 Sign: digest: 76C6248BC7291A119A3450A27D8C4D02209DA99DCA1D64D72BD8CDE83FF27E1A 
+2018-10-27 02:00:34.617 UTC [common/channelconfig] NewStandardValues -> DEBU 005 Initializing protos for *channelconfig.ChannelProtos
+2018-10-27 02:00:34.617 UTC [common/channelconfig] initializeProtosStruct -> DEBU 006 Processing field: HashingAlgorithm
+2018-10-27 02:00:34.617 UTC [common/channelconfig] initializeProtosStruct -> DEBU 007 Processing field: BlockDataHashingStructure
+2018-10-27 02:00:34.618 UTC [common/channelconfig] initializeProtosStruct -> DEBU 008 Processing field: OrdererAddresses
+2018-10-27 02:00:34.618 UTC [common/channelconfig] initializeProtosStruct -> DEBU 009 Processing field: Consortium
+2018-10-27 02:00:34.618 UTC [common/channelconfig] initializeProtosStruct -> DEBU 00a Processing field: Capabilities
+
+
+********************************************************************************
+
+                      Login to cli.org2 
+********************************************************************************
+
+
+Nitishs-MacBook-Pro:network nitishbhushan$ docker exec -it cli.org2 bash
+root@3f4e3cf66f94:/opt/gopath/src/github.com/hyperledger/fabric/peer# docker exec cli.org2 bash -c "peer chaincode instantiate -C testchannel -n artWork -v 0 -c '{\""Args\":[]}
+bash: docker: command not found
+root@3f4e3cf66f94:/opt/gopath/src/github.com/hyperledger/fabric/peer# peer chaincode instantiate -C testchannel -n artWork -v 0 -c '{"Args":[]}'
+2018-10-27 02:03:29.084 UTC [msp] GetLocalMSP -> DEBU 001 Returning existing local MSP
+2018-10-27 02:03:29.084 UTC [msp] GetDefaultSigningIdentity -> DEBU 002 Obtaining default signing identity
+2018-10-27 02:03:29.085 UTC [msp/identity] Sign -> DEBU 003 Sign: plaintext: 0AA3070A5B08011A0B08F18ECFDE0510..

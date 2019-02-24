@@ -1,0 +1,6 @@
+Add Org3 with one peer to your network. You can set TLS disabled in your network.
+
+Use configtxlator to update the channel configuration. How does it work, how can you join Org3 to  testchannel? 
+Write a client for Org3 using NodeJS to invoke your chaincode. 
+Org3 may also use the client to join its peer into the channel. 
+Use Kafka OS. 
